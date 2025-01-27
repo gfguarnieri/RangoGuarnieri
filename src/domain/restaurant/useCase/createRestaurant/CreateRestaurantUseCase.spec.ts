@@ -3,7 +3,7 @@ import { CreateRestauranteUseCase } from './CreateRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
-import { InputValidationError } from '@core/errors/InputValidationError'
+import { InputValidationError } from 'shared/errors/InputValidationError'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let createRestaurantUseCase: CreateRestauranteUseCase

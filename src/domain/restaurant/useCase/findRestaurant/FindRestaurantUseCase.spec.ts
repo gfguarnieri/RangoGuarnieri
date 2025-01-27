@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { FindRestaurantUseCase } from './FindRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
-import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
+import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 

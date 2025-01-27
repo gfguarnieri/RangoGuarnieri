@@ -1,4 +1,4 @@
-import { InputValidationError } from '@core/errors/InputValidationError'
+import { InputValidationError } from 'shared/errors/InputValidationError'
 import { IRestaurant } from '../models/IRestaurant'
 
 export class RestaurantValidator {

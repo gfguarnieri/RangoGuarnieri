@@ -1,4 +1,4 @@
-import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
+import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'

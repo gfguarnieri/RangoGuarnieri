@@ -1,11 +1,11 @@
 import 'reflect-metadata'
-import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
+import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { UpdateRestauranteUseCase } from './UpdateRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { IRestaurant } from '@domain/restaurant/models/IRestaurant'
-import { InputValidationError } from '@core/errors/InputValidationError'
+import { InputValidationError } from 'shared/errors/InputValidationError'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let updateRestaurantUseCase: UpdateRestauranteUseCase
@@ -14,6 +14,17 @@ describe('UpdateRestaurantUseCase', async () => {
   beforeAll(async () => {
     restaurantRepository = new InMemoryRestaurantRepository()
     updateRestaurantUseCase = new UpdateRestauranteUseCase(restaurantRepository)
+  })
+
+  it('should throw an error if id is not provided', async () => {
+    const updateData: ICreateRestaurantDTO = {
+      name: 'Restaurante Giovanni',
+      image: 'giovanni-logo',
+    }
+
+    await expect(
+      updateRestaurantUseCase.execute('', updateData),
+    ).rejects.toThrowError(UseCaseValidationError)
   })
 
   it('should update a restaurant', async () => {

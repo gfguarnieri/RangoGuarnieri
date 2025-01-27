@@ -1,4 +1,4 @@
-import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
+import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
