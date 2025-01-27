@@ -1,23 +1,11 @@
-import {
-  Restaurant,
-  RestaurantProps,
-} from '@domain/restaurant/entities/Restaurant'
-
-interface ICreateRestaurantRequest extends RestaurantProps {
-  id?: string
-}
-
-interface ICreateRestaurantResponse extends RestaurantProps {
-  id: string
-}
+import { ICreateRestaurantDTO } from '../dtos/ICreateRestaurantDTO'
+import { Restaurant } from '../entities/Restaurant'
 
 export interface IRestaurantRepository {
-  create(
-    restaurant: ICreateRestaurantRequest,
-  ): Promise<ICreateRestaurantResponse>
+  create(restaurant: ICreateRestaurantDTO): Promise<Restaurant>
   update(
     id: string,
-    restaurant: ICreateRestaurantRequest,
+    restaurant: ICreateRestaurantDTO,
   ): Promise<Restaurant | undefined>
   findById(id: string): Promise<Restaurant | undefined>
   list(): Promise<Restaurant[]>

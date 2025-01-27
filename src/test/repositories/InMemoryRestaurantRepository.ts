@@ -1,5 +1,4 @@
-import { ICreateRestaurantRequest } from '@domain/restaurant/dtos/ICreateRestaurantRequest'
-import { IUpdateRestaurantRequest } from '@domain/restaurant/dtos/IUpdateRestaurantRequest'
+import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 
@@ -15,8 +14,8 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
     number,
     postalCode,
     state,
-  }: ICreateRestaurantRequest) {
-    const restaurant = Restaurant.create({
+  }: ICreateRestaurantDTO) {
+    const item = new Restaurant({
       name,
       image,
       address,
@@ -26,8 +25,8 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
       postalCode,
       state,
     })
-    this.restaurants.push(restaurant)
-    return restaurant
+    this.restaurants.push(item)
+    return item
   }
 
   async update(
@@ -41,15 +40,15 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
       number,
       postalCode,
       state,
-    }: IUpdateRestaurantRequest,
+    }: ICreateRestaurantDTO,
   ) {
     const itemIndex = this.restaurants.findIndex(
-      (restaurant) => restaurant.id.toString() === id,
+      (restaurant) => restaurant.id === id,
     )
 
     if (itemIndex < 0) return undefined
 
-    const restaurant = Restaurant.update(this.restaurants[itemIndex], {
+    Object.assign(this.restaurants[itemIndex], {
       name,
       image,
       address,
@@ -60,13 +59,11 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
       state,
     })
 
-    return restaurant
+    return this.restaurants[itemIndex]
   }
 
   async findById(id: string) {
-    return this.restaurants.find(
-      (restaurant) => restaurant.id.toString() === id,
-    )
+    return this.restaurants.find((restaurant) => restaurant.id === id)
   }
 
   async list(): Promise<Restaurant[]> {

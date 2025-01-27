@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { FindRestaurantUseCase } from './FindRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
-import { ICreateRestaurantRequest } from '@domain/restaurant/dtos/ICreateRestaurantRequest'
 import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
 import { describe, it, expect, beforeAll } from 'vitest'
+import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let findRestaurantUseCase: FindRestaurantUseCase
@@ -15,7 +15,7 @@ describe('FindRestaurantUseCase', async () => {
   })
 
   it('should find a restaurant by id', async () => {
-    const restaurantData: ICreateRestaurantRequest = {
+    const restaurantData: ICreateRestaurantDTO = {
       name: 'Restaurante Guarnieri',
       image: 'guarnieri-logo',
       address: 'Rua José',
@@ -28,8 +28,12 @@ describe('FindRestaurantUseCase', async () => {
 
     const createdRestaurant = await restaurantRepository.create(restaurantData)
 
+    if (!createdRestaurant || !createdRestaurant.id) {
+      throw new Error('Error creating restaurant')
+    }
+
     const foundRestaurant = await findRestaurantUseCase.execute(
-      createdRestaurant.id.toString(),
+      createdRestaurant.id,
     )
 
     expect(foundRestaurant).toHaveProperty('id')

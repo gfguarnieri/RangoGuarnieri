@@ -1,9 +1,10 @@
 import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
+import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
+import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
+import { RestaurantValidator } from '@domain/restaurant/validators/RestaurantValidator'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
 import { inject, injectable } from 'tsyringe'
-import { IUpdateRestaurantRequest } from '@domain/restaurant/dtos/IUpdateRestaurantRequest'
-import { IUpdateRestaurantResponse } from '@domain/restaurant/dtos/IUpdateRestaurantResponse'
 
 @injectable()
 export class UpdateRestauranteUseCase {
@@ -12,12 +13,11 @@ export class UpdateRestauranteUseCase {
     private restaurantRepository: IRestaurantRepository,
   ) {}
 
-  async execute(
-    id: string,
-    input: IUpdateRestaurantRequest,
-  ): Promise<IUpdateRestaurantResponse> {
+  async execute(id: string, input: ICreateRestaurantDTO): Promise<Restaurant> {
+    RestaurantValidator.Validate(input)
+
     if (!id) {
-      throw new UseCaseValidationError('Invalid is required')
+      throw new UseCaseValidationError('Id is required')
     }
 
     const restaurantExists = await this.restaurantRepository.findById(id)
@@ -30,6 +30,6 @@ export class UpdateRestauranteUseCase {
     if (!restaurant) {
       throw new UseCaseValidationError('Restaurant not created')
     }
-    return restaurant.object
+    return restaurant
   }
 }

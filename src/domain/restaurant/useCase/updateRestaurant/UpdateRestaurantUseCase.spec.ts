@@ -1,11 +1,11 @@
 import 'reflect-metadata'
-import { EntityValidationError } from '@core/errors/EntityValidationError'
 import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
 import { UpdateRestauranteUseCase } from './UpdateRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
 import { describe, it, expect, beforeAll } from 'vitest'
-import { ICreateRestaurantRequest } from '@domain/restaurant/dtos/ICreateRestaurantRequest'
-import { IUpdateRestaurantRequest } from '@domain/restaurant/dtos/IUpdateRestaurantRequest'
+import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
+import { IRestaurant } from '@domain/restaurant/models/IRestaurant'
+import { InputValidationError } from '@core/errors/InputValidationError'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let updateRestaurantUseCase: UpdateRestauranteUseCase
@@ -17,20 +17,24 @@ describe('UpdateRestaurantUseCase', async () => {
   })
 
   it('should update a restaurant', async () => {
-    const restaurantData: ICreateRestaurantRequest = {
+    const restaurantData: ICreateRestaurantDTO = {
       name: 'Restaurante Guarnieri',
       image: 'guarnieri-logo',
     }
 
     const createdRestaurant = await restaurantRepository.create(restaurantData)
 
-    const updateData: IUpdateRestaurantRequest = {
+    if (!createdRestaurant || !createdRestaurant.id) {
+      throw new Error('Error creating restaurant')
+    }
+
+    const updateData: ICreateRestaurantDTO = {
       name: 'Restaurante Giovanni',
       image: 'giovanni-logo',
     }
 
     const updatedRestaurant = await updateRestaurantUseCase.execute(
-      createdRestaurant.id.toString(),
+      createdRestaurant.id,
       updateData,
     )
 
@@ -40,7 +44,7 @@ describe('UpdateRestaurantUseCase', async () => {
   })
 
   it('should throw an error if restaurant does not exist', async () => {
-    const updateData: IUpdateRestaurantRequest = {
+    const updateData: ICreateRestaurantDTO = {
       name: 'Restaurante não existente',
       image: 'image-url-example',
       address: 'Rua José',
@@ -57,7 +61,7 @@ describe('UpdateRestaurantUseCase', async () => {
   })
 
   it('should throw an error if update data is invalid', async () => {
-    const restaurantData: ICreateRestaurantRequest = {
+    const restaurantData: IRestaurant = {
       name: 'Restaurante original',
       image: 'original-image-url',
       address: 'Rua José',
@@ -70,7 +74,7 @@ describe('UpdateRestaurantUseCase', async () => {
 
     const createdRestaurant = await restaurantRepository.create(restaurantData)
 
-    const invalidUpdateData: IUpdateRestaurantRequest = {
+    const invalidUpdateData: ICreateRestaurantDTO = {
       name: '',
       image: '',
       address: 'Rua José',
@@ -81,11 +85,12 @@ describe('UpdateRestaurantUseCase', async () => {
       postalCode: '18065-511',
     }
 
+    if (!createdRestaurant || !createdRestaurant.id) {
+      throw new Error('Error creating restaurant')
+    }
+
     await expect(
-      updateRestaurantUseCase.execute(
-        createdRestaurant.id.toString(),
-        invalidUpdateData,
-      ),
-    ).rejects.toThrowError(EntityValidationError)
+      updateRestaurantUseCase.execute(createdRestaurant.id, invalidUpdateData),
+    ).rejects.toThrowError(InputValidationError)
   })
 })
