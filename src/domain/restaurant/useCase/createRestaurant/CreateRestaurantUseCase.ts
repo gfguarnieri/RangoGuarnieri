@@ -1,9 +1,9 @@
 import { UseCaseValidationError } from '@core/errors/UseCaseValidationError'
-import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
-import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
+import { ICreateRestaurantRequest } from '@domain/restaurant/dtos/ICreateRestaurantRequest'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
 import { inject, injectable } from 'tsyringe'
+import { ICreateRestaurantResponse } from '@domain/restaurant/dtos/ICreateRestaurantResponse'
 
 @injectable()
 export class CreateRestauranteUseCase {
@@ -12,7 +12,9 @@ export class CreateRestauranteUseCase {
     private restaurantRepository: IRestaurantRepository,
   ) {}
 
-  async execute(input: ICreateRestaurantDTO): Promise<Restaurant> {
+  async execute(
+    input: ICreateRestaurantRequest,
+  ): Promise<ICreateRestaurantResponse> {
     const restaurant = await this.restaurantRepository.create(input)
     if (!restaurant) {
       throw new UseCaseValidationError('Restaurant not created')

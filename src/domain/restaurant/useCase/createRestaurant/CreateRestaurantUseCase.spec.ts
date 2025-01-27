@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { EntityValidationError } from '@core/errors/EntityValidationError'
-import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
+import { ICreateRestaurantRequest } from '@domain/restaurant/dtos/ICreateRestaurantRequest'
 import { CreateRestauranteUseCase } from './CreateRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
 import { describe, it, expect, beforeAll } from 'vitest'
@@ -15,20 +15,25 @@ describe('CreateRestaurantUseCase', async () => {
   })
 
   it('should create a restaurant', async () => {
-    const restaurantData: ICreateRestaurantDTO = {
+    const restaurantData: ICreateRestaurantRequest = {
       name: 'Restaurante Guarnieri',
       image: 'test-image-url',
+      address: 'Rua José',
+      number: '123',
+      city: 'Sorocaba',
+      state: 'SP',
+      country: 'Brazil',
+      postalCode: '18065-511',
     }
 
     const restaurant = await createRestaurantUseCase.execute(restaurantData)
 
     expect(restaurant).toHaveProperty('id')
-    expect(restaurant.name).toBe(restaurantData.name)
-    expect(restaurant.image).toBe(restaurantData.image)
+    expect(restaurant).contains(restaurantData)
   })
 
   it('should throw an error if restaurant data is invalid', async () => {
-    const invalidRestaurantData: ICreateRestaurantDTO = {
+    const invalidRestaurantData: ICreateRestaurantRequest = {
       name: '',
       image: '',
     }

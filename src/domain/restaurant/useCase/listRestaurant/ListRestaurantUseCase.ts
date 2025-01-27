@@ -1,4 +1,4 @@
-import { Restaurant } from '@domain/restaurant/entities/Restaurant'
+import { IListRestaurantResponse } from '@domain/restaurant/dtos/IListRestaurantResponse'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
 import { inject, injectable } from 'tsyringe'
@@ -10,8 +10,12 @@ export class ListRestaurantUseCase {
     private restaurantRepository: IRestaurantRepository,
   ) {}
 
-  async execute(): Promise<Restaurant[]> {
-    const restaurants = await this.restaurantRepository.list()
-    return restaurants
+  async execute(): Promise<IListRestaurantResponse> {
+    const restaurants = (await this.restaurantRepository.list()).map(
+      (i) => i.object,
+    )
+    return {
+      restaurants,
+    }
   }
 }

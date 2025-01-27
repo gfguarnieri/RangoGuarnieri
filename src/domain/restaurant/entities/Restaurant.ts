@@ -1,5 +1,6 @@
 import { EntityValidationError } from '@core/errors/EntityValidationError'
 import { UniqueEntityID } from '@core/entities/UniqueId'
+import { IRestaurantDTO } from '../dtos/IRestaurantDTO'
 
 export interface RestaurantProps {
   name: string
@@ -37,12 +38,30 @@ export class Restaurant {
   }
 
   static update(restaurant: Restaurant, props: RestaurantProps) {
-    const updatedRestaurant = new Restaurant(props, restaurant.id)
+    const updatedRestaurant = new Restaurant(
+      props,
+      new UniqueEntityID(restaurant.id),
+    )
     return updatedRestaurant
   }
 
+  get object() {
+    const restaurant: IRestaurantDTO = {
+      id: this.id,
+      name: this.name,
+      image: this.image,
+      address: this.address,
+      number: this.number,
+      city: this.city,
+      state: this.state,
+      country: this.country,
+      postalCode: this.postalCode,
+    }
+    return restaurant
+  }
+
   get id() {
-    return this._id
+    return this._id.toString()
   }
 
   get name() {
