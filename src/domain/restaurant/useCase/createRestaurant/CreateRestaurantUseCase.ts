@@ -1,4 +1,3 @@
-import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
@@ -18,9 +17,6 @@ export class CreateRestauranteUseCase {
   async execute(input: IRequest): Promise<Restaurant> {
     RestaurantValidator.Validate(input)
     const restaurant = await this.restaurantRepository.create(input)
-    if (!restaurant) {
-      throw new UseCaseValidationError('Restaurant not created')
-    }
     return restaurant
   }
 }

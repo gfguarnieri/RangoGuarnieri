@@ -6,6 +6,7 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { IRestaurant } from '@domain/restaurant/models/IRestaurant'
 import { InputValidationError } from 'shared/errors/InputValidationError'
+import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let updateRestaurantUseCase: UpdateRestauranteUseCase
@@ -50,8 +51,8 @@ describe('UpdateRestaurantUseCase', async () => {
     )
 
     expect(updatedRestaurant).toHaveProperty('id')
-    expect(updatedRestaurant.name).toBe(updateData.name)
-    expect(updatedRestaurant.image).toBe(updateData.image)
+    expect(updatedRestaurant?.name).toBe(updateData.name)
+    expect(updatedRestaurant?.image).toBe(updateData.image)
   })
 
   it('should throw an error if restaurant does not exist', async () => {
@@ -68,7 +69,7 @@ describe('UpdateRestaurantUseCase', async () => {
 
     await expect(
       updateRestaurantUseCase.execute('000', updateData),
-    ).rejects.toThrowError(UseCaseValidationError)
+    ).rejects.toThrowError(NotFoundValidationError)
   })
 
   it('should throw an error if update data is invalid', async () => {
@@ -86,7 +87,7 @@ describe('UpdateRestaurantUseCase', async () => {
     const createdRestaurant = await restaurantRepository.create(restaurantData)
 
     const invalidUpdateData: ICreateRestaurantDTO = {
-      name: '',
+      name: 'Restaurante simples',
       image: '',
       address: 'Rua José',
       number: '123',
