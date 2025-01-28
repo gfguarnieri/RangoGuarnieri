@@ -63,7 +63,7 @@ describe('UpdateRestaurantUseCase', async () => {
       number: '123',
       city: 'Sorocaba',
       state: 'SP',
-      country: 'Brazil',
+      neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
     }
 
@@ -80,7 +80,7 @@ describe('UpdateRestaurantUseCase', async () => {
       number: '123',
       city: 'Sorocaba',
       state: 'SP',
-      country: 'Brazil',
+      neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
     }
 
@@ -93,7 +93,7 @@ describe('UpdateRestaurantUseCase', async () => {
       number: '123',
       city: 'Sorocaba',
       state: 'SP',
-      country: 'Brazil',
+      neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
     }
 

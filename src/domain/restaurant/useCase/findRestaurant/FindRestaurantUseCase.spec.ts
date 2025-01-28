@@ -22,7 +22,7 @@ describe('FindRestaurantUseCase', async () => {
       number: '123',
       city: 'Sorocaba',
       state: 'SP',
-      country: 'Brazil',
+      neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
     }
 

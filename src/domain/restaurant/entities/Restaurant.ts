@@ -11,6 +11,7 @@ export class Restaurant {
   state?: string
   country?: string
   postalCode?: string
+  neighborhood?: string
 
   constructor(props: IRestaurant, id?: string) {
     this.id = id ?? randomUUID()
@@ -20,7 +21,7 @@ export class Restaurant {
     this.number = props.number
     this.city = props.city
     this.state = props.state
-    this.country = props.country
     this.postalCode = props.postalCode
+    this.neighborhood = props.neighborhood
   }
 }

@@ -20,6 +20,36 @@
 - Não utilizar query builder 
 - Utilizar raw query para as consultas no banco de dados
 
+
+### Configuração do ambiente
+Para configurar o ambiente é necessário ter:
+- NodeJS
+- Docker
+- Docker Compose
+
+#### Variáveis de ambiente
+Para configurar as variáveis de ambiente, crie um arquivo `.env` na raiz do projeto e adicione os valores desejados. Utilizar como referência o arquivo `.env.example`.
+
+- :computer: Utilize `.env.dev` para ambiente de desenvolvimento;
+- :test_tube: Utilize `.env.test` para ambiente de testes;
+- :rocket: Utilize `.env` para ambiente de produção;
+
+#### Scripts
+- `npm run dev`: Inicia o servidor em modo de desenvolvimento
+- `npm run test`: Executa os testes unitários
+
+#### Banco de Dados (Docker)
+
+Para configurar o banco de dados, execute o comando abaixo:
+`docker-compose --env-file <.env file> up -d`
+
+:warning: *Definir configuração do banco de dados em .env*
+
+#### Instalação de dependências
+
+Para instalar as dependências do projeto, execute o comando abaixo:
+`npm install`
+
 ### Dependências
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://github.com/expressjs/express)

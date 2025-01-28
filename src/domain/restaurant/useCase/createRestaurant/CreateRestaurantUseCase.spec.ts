@@ -22,8 +22,8 @@ describe('CreateRestaurantUseCase', async () => {
       number: '123',
       city: 'Sorocaba',
       state: 'SP',
-      country: 'Brazil',
       postalCode: '18065-511',
+      neighborhood: 'Jardim Paulista',
     }
 
     const restaurant = await createRestaurantUseCase.execute(restaurantData)

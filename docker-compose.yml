@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres
+    container_name: pgRangoGuarnieri
+    ports:
+      - "${PG_PORT}:5432"
+    environment:
+      POSTGRES_PASSWORD: "${PG_PASSWORD}"
+      POSTGRES_DB: "${PG_DATABASE}"
+    volumes:
+      - ./src/shared/infra/pg/guarnieriRango.sql:/docker-entrypoint-initdb.d/guarnieriRango.sql
