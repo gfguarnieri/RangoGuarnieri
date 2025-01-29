@@ -69,4 +69,14 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
   async list(): Promise<Restaurant[]> {
     return this.restaurants
   }
+
+  async delete(id: string): Promise<void> {
+    const itemIndex = this.restaurants.findIndex(
+      (restaurant) => restaurant.id === id,
+    )
+
+    if (itemIndex < 0) return
+
+    this.restaurants.splice(itemIndex, 1)
+  }
 }

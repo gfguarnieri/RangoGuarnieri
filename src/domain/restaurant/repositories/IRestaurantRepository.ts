@@ -9,4 +9,5 @@ export interface IRestaurantRepository {
   ): Promise<Restaurant | undefined>
   findById(id: string): Promise<Restaurant | undefined>
   list(): Promise<Restaurant[]>
+  delete(id: string): Promise<void>
 }
