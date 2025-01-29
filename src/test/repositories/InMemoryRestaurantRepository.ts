@@ -1,4 +1,5 @@
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
+import { IUpdateRestaurantDTO } from '@domain/restaurant/dtos/IUpdateRestaurantDTO'
 import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 
@@ -40,7 +41,7 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
       number,
       postalCode,
       state,
-    }: ICreateRestaurantDTO,
+    }: IUpdateRestaurantDTO,
   ) {
     const itemIndex = this.restaurants.findIndex(
       (restaurant) => restaurant.id === id,

@@ -36,6 +36,12 @@ describe('CreateRestaurantUseCase', async () => {
     const invalidRestaurantData: ICreateRestaurantDTO = {
       name: '',
       image: '',
+      address: '',
+      city: '',
+      state: '',
+      postalCode: '',
+      neighborhood: '',
+      number: '',
     }
     await expect(
       createRestaurantUseCase.execute(invalidRestaurantData),

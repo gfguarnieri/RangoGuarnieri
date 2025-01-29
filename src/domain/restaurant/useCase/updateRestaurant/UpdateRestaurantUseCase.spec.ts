@@ -21,6 +21,12 @@ describe('UpdateRestaurantUseCase', async () => {
     const updateData: ICreateRestaurantDTO = {
       name: 'Restaurante Giovanni',
       image: 'giovanni-logo',
+      address: 'Rua José',
+      number: '123',
+      city: 'Sorocaba',
+      state: 'SP',
+      neighborhood: 'Jardim Paulista',
+      postalCode: '18065511',
     }
 
     await expect(
@@ -32,6 +38,12 @@ describe('UpdateRestaurantUseCase', async () => {
     const restaurantData: ICreateRestaurantDTO = {
       name: 'Restaurante Guarnieri',
       image: 'guarnieri-logo',
+      address: 'Rua José',
+      number: '123',
+      city: 'Sorocaba',
+      state: 'SP',
+      neighborhood: 'Jardim Paulista',
+      postalCode: '18065-511',
     }
 
     const createdRestaurant = await restaurantRepository.create(restaurantData)
@@ -43,6 +55,12 @@ describe('UpdateRestaurantUseCase', async () => {
     const updateData: ICreateRestaurantDTO = {
       name: 'Restaurante Giovanni',
       image: 'giovanni-logo',
+      address: 'Rua José',
+      number: '123',
+      city: 'Sorocaba',
+      state: 'SP',
+      neighborhood: 'Jardim Paulista',
+      postalCode: '18065-511',
     }
 
     const updatedRestaurant = await updateRestaurantUseCase.execute(

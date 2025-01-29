@@ -5,13 +5,14 @@ export class Restaurant {
   id?: string
   name: string
   image: string
-  address?: string
-  number?: string
-  city?: string
-  state?: string
-  country?: string
-  postalCode?: string
-  neighborhood?: string
+  address: string
+  number: string
+  city: string
+  state: string
+  postalCode: string
+  neighborhood: string
+  createdAt?: Date
+  updatedAt?: Date
 
   constructor(props: IRestaurant, id?: string) {
     this.id = id ?? randomUUID()

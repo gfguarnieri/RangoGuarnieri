@@ -17,11 +17,23 @@ describe('ListRestaurantUseCase', async () => {
     const restaurant1: ICreateRestaurantDTO = {
       name: 'Restaurante Guarnieri',
       image: 'guarnieri-logo',
+      address: 'Rua José',
+      number: '123',
+      city: 'Sorocaba',
+      state: 'SP',
+      neighborhood: 'Jardim Paulista',
+      postalCode: '18065-511',
     }
 
     const restaurant2: ICreateRestaurantDTO = {
       name: 'Restaurante Giovanni',
       image: 'giovanni-logo',
+      address: 'Rua José',
+      number: '123',
+      city: 'Sorocaba',
+      state: 'SP',
+      neighborhood: 'Jardim Paulista',
+      postalCode: '18065-511',
     }
 
     await restaurantRepository.create(restaurant1)
