@@ -5,9 +5,30 @@ import { StatusCodes } from 'http-status-codes'
 
 export class CreateRestaurantController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, image } = request.body
+    const {
+      name,
+      image,
+      address,
+      city,
+      neighborhood,
+      number,
+      postalCode,
+      state,
+    } = request.body
+
     const createRestaurantUseCase = container.resolve(CreateRestauranteUseCase)
-    const restaurant = await createRestaurantUseCase.execute({ name, image })
+
+    const restaurant = await createRestaurantUseCase.execute({
+      name,
+      image,
+      address,
+      city,
+      neighborhood,
+      number,
+      postalCode,
+      state,
+    })
+
     return response.status(StatusCodes.CREATED).json(restaurant)
   }
 }
