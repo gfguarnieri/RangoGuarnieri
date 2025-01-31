@@ -1,6 +1,6 @@
 -- Em desenvolvimento 
 
-CREATE TABLE restaurant(
+CREATE TABLE IF NOT EXISTS restaurant(
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
     image VARCHAR(255) NOT NULL,
@@ -12,4 +12,15 @@ CREATE TABLE restaurant(
     postalCode VARCHAR(8) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS restaurant_hours(
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    restaurant_id INT NOT NULL,
+    day_of_week VARCHAR(10) NOT NULL,
+    opening_time TIME NOT NULL,
+    closing_time TIME NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
 );

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
+import { InputValidationError } from 'shared/errors/InputValidationError'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 
 export function ErrorHandler(
@@ -11,8 +12,16 @@ export function ErrorHandler(
 ) {
   if (err instanceof UseCaseValidationError) {
     return res.status(400).json({
-      type: 'validation',
+      type: 'usecase',
       error: err.message,
+    })
+  }
+
+  if (err instanceof InputValidationError) {
+    return res.status(400).json({
+      type: 'input_validation',
+      error: err.message,
+      errors: err.errors,
     })
   }
 

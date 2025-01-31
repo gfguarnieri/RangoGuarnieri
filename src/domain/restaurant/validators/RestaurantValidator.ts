@@ -1,18 +1,35 @@
-import { InputValidationError } from 'shared/errors/InputValidationError'
+import {
+  InputValidationError,
+  ItemValidationError,
+} from 'shared/errors/InputValidationError'
 import { IRestaurant } from '../models/IRestaurant'
 
 export class RestaurantValidator {
   static Validate(input: Partial<IRestaurant>) {
+    const errors: ItemValidationError[] = []
+
     if (!input.state || input.state.length !== 2) {
-      throw new InputValidationError(
-        'State is required and must have 2 characters',
-      )
+      errors.push({
+        field: 'state',
+        message: 'State is required and must have 2 characters',
+      })
     }
+
     if (!input.name) {
-      throw new InputValidationError('Name is required')
+      errors.push({
+        field: 'name',
+        message: 'Name is required',
+      })
     }
     if (!input.image) {
-      throw new InputValidationError('Image is required')
+      errors.push({
+        field: 'image',
+        message: 'Image is required',
+      })
     }
+
+    if (errors.length === 0) return
+
+    throw new InputValidationError('Invalid Restaurant', errors)
   }
 }
