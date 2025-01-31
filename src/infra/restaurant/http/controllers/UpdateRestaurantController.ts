@@ -1,7 +1,7 @@
+import { UpdateRestauranteUseCase } from '@domain/restaurant/useCase/updateRestaurant/UpdateRestaurantUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'
-import { UpdateRestauranteUseCase } from '@domain/restaurant/useCase/updateRestaurant/UpdateRestaurantUseCase'
 
 export class UpdateRestaurantController {
   async handle(request: Request, response: Response): Promise<Response> {
