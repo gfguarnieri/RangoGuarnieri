@@ -37,10 +37,7 @@ export class RestaurantRepository implements IRestaurantRepository {
 
     const [row] = result.data
 
-    const restaurantCreated = new Restaurant({
-      id: row.id,
-      ...restaurant,
-    })
+    const restaurantCreated = new Restaurant(restaurant, row.id)
 
     return restaurantCreated
   }
@@ -73,10 +70,7 @@ export class RestaurantRepository implements IRestaurantRepository {
       throw new RepositoryError('Restaurant not found')
     }
 
-    const restaurantUpdated = new Restaurant({
-      id,
-      ...restaurant,
-    })
+    const restaurantUpdated = new Restaurant(restaurant, id)
 
     return restaurantUpdated
   }
@@ -90,10 +84,7 @@ export class RestaurantRepository implements IRestaurantRepository {
     if (rows.length === 0) {
       return undefined
     }
-
-    const restaurant = rows[0]
-
-    return restaurant
+    return rows[0]
   }
 
   async list(): Promise<Restaurant[]> {

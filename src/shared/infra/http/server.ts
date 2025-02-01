@@ -9,7 +9,7 @@ import '../../container'
 
 import { router } from './routes'
 import { RangoDataSource } from '../typeorm/connection'
-import { ErrorHandler } from 'infra/restaurant/http/middlewares/ErrorHandler'
+import { ErrorHandler } from './middlewares/ErrorHandler'
 
 export const app = express()
 

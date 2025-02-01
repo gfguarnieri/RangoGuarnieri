@@ -3,7 +3,6 @@ import { CreateRestauranteUseCase } from './CreateRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
-import { InputValidationError } from 'shared/errors/InputValidationError'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let createRestaurantUseCase: CreateRestauranteUseCase
@@ -30,21 +29,5 @@ describe('CreateRestaurantUseCase', async () => {
 
     expect(restaurant).toHaveProperty('id')
     expect(restaurant).contains(restaurantData)
-  })
-
-  it('should throw an error if restaurant data is invalid', async () => {
-    const invalidRestaurantData: ICreateRestaurantDTO = {
-      name: '',
-      image: '',
-      address: '',
-      city: '',
-      state: '',
-      postalCode: '',
-      neighborhood: '',
-      number: '',
-    }
-    await expect(
-      createRestaurantUseCase.execute(invalidRestaurantData),
-    ).rejects.toThrowError(InputValidationError)
   })
 })

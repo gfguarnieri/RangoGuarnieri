@@ -1,6 +1,6 @@
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
-import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
+import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 import { inject, injectable } from 'tsyringe'
 
 @injectable()
@@ -14,7 +14,7 @@ export class DeleteRestaurantUseCase {
     const restaurant = await this.restaurantRepository.findById(id)
 
     if (!restaurant) {
-      throw new UseCaseValidationError('Restaurant not found')
+      throw new NotFoundValidationError('Restaurant not found')
     }
 
     return this.restaurantRepository.delete(id)
