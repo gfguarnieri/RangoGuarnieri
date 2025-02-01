@@ -4,14 +4,22 @@ import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaura
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
+import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
+import { InMemoryRestaurantHoursRepository } from 'test/repositories/InMemoryRestaurantHoursRepository'
 
-let restaurantRepository: InMemoryRestaurantRepository
+let restaurantRepository: IRestaurantRepository
+let restaurantHoursRepository: IRestaurantHoursRepository
 let findRestaurantUseCase: FindRestaurantUseCase
 
 describe('FindRestaurantUseCase', async () => {
   beforeAll(async () => {
     restaurantRepository = new InMemoryRestaurantRepository()
-    findRestaurantUseCase = new FindRestaurantUseCase(restaurantRepository)
+    restaurantHoursRepository = new InMemoryRestaurantHoursRepository()
+    findRestaurantUseCase = new FindRestaurantUseCase(
+      restaurantRepository,
+      restaurantHoursRepository,
+    )
   })
 
   it('should find a restaurant by id', async () => {
