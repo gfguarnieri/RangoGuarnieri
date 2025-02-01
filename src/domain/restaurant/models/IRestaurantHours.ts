@@ -14,4 +14,5 @@ export interface IRestaurantHours {
   dayOfWeek: DayOfWeek
   openingTime: string
   closingTime: string
+  createdAt?: Date
 }

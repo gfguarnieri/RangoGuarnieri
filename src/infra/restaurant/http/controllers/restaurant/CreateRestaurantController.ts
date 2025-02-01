@@ -2,21 +2,27 @@ import { CreateRestauranteUseCase } from '@domain/restaurant/useCase/createResta
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'
-import { z } from 'zod'
-import { ValidationResources } from 'shared/resources/ValidationResources'
+import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
+import { z } from '@zod/i18n'
 
 const schema = z.object({
-  name: z.string().nonempty(ValidationResources.required),
-  image: z.string().nonempty(ValidationResources.required),
-  address: z.string().nonempty(ValidationResources.required),
-  city: z.string().nonempty(ValidationResources.required),
-  neighborhood: z.string().nonempty(ValidationResources.required),
-  number: z.string().nonempty(ValidationResources.required),
-  postalCode: z
-    .string()
-    .length(8, ValidationResources.strLength(8))
-    .nonempty(ValidationResources.required),
-  state: z.string().length(2, ValidationResources.strLength(2)),
+  name: z.string().max(100).nonempty(),
+  image: z.string().max(255).nonempty(),
+  address: z.string().max(150).nonempty(),
+  city: z.string().max(50).nonempty(),
+  neighborhood: z.string().max(50).nonempty(),
+  number: z.string().max(20).nonempty(),
+  postalCode: z.string().length(8).nonempty(),
+  state: z.string().length(2).nonempty(),
+  restaurantHours: z
+    .array(
+      z.object({
+        openingTime: z.string().length(5).nonempty(),
+        closingTime: z.string().length(5).nonempty(),
+        dayOfWeek: z.nativeEnum(DayOfWeek),
+      }),
+    )
+    .optional(),
 })
 
 export class CreateRestaurantController {
@@ -25,7 +31,7 @@ export class CreateRestaurantController {
 
     if (!validationResult.success) {
       return response.status(StatusCodes.BAD_REQUEST).json({
-        message: 'Verifique os campos inválidos',
+        message: 'Verify the invalid fields',
         errors: validationResult.error.errors,
       })
     }

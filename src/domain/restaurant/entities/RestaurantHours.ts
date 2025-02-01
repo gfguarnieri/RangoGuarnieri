@@ -8,13 +8,13 @@ export class RestaurantHours {
   openingTime: string
   closingTime: string
   createdAt?: Date
-  updatedAt?: Date
 
-  constructor(props: IRestaurantHours) {
-    this.id = props.id ?? randomUUID()
+  constructor(props: IRestaurantHours, id?: string) {
+    this.id = id ?? randomUUID()
     this.restaurantId = props.restaurantId
     this.dayOfWeek = props.dayOfWeek
     this.openingTime = props.openingTime
     this.closingTime = props.closingTime
+    this.createdAt = props.createdAt
   }
 }

@@ -25,6 +25,7 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
       number,
       postalCode,
       state,
+      restaurantHours: [],
     })
     this.restaurants.push(item)
     return item
@@ -72,12 +73,8 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const itemIndex = this.restaurants.findIndex(
-      (restaurant) => restaurant.id === id,
+    this.restaurants = this.restaurants.filter(
+      (restaurant) => restaurant.id !== id,
     )
-
-    if (itemIndex < 0) return
-
-    this.restaurants.splice(itemIndex, 1)
   }
 }

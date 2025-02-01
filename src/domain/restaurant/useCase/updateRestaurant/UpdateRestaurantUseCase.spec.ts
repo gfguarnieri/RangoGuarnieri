@@ -4,14 +4,21 @@ import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaura
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
+import { InMemoryRestaurantHoursRepository } from 'test/repositories/InMemoryRestaurantHoursRepository'
 
 let restaurantRepository: InMemoryRestaurantRepository
+let restaurantHoursRepository: InMemoryRestaurantHoursRepository
+
 let updateRestaurantUseCase: UpdateRestauranteUseCase
 
 describe('UpdateRestaurantUseCase', async () => {
   beforeAll(async () => {
     restaurantRepository = new InMemoryRestaurantRepository()
-    updateRestaurantUseCase = new UpdateRestauranteUseCase(restaurantRepository)
+    restaurantHoursRepository = new InMemoryRestaurantHoursRepository()
+    updateRestaurantUseCase = new UpdateRestauranteUseCase(
+      restaurantRepository,
+      restaurantHoursRepository,
+    )
   })
 
   it('should update a restaurant', async () => {
@@ -24,6 +31,7 @@ describe('UpdateRestaurantUseCase', async () => {
       state: 'SP',
       neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
+      restaurantHours: [],
     }
 
     const createdRestaurant = await restaurantRepository.create(restaurantData)
@@ -41,6 +49,7 @@ describe('UpdateRestaurantUseCase', async () => {
       state: 'SP',
       neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
+      restaurantHours: [],
     }
 
     const updatedRestaurant = await updateRestaurantUseCase.execute(
@@ -63,6 +72,7 @@ describe('UpdateRestaurantUseCase', async () => {
       state: 'SP',
       neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
+      restaurantHours: [],
     }
 
     await expect(

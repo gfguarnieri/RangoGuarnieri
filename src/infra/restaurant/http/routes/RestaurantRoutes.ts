@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { CreateRestaurantController } from '../controllers/CreateRestaurantController'
-import { UpdateRestaurantController } from '../controllers/UpdateRestaurantController'
-import { ListRestaurantController } from '../controllers/ListRestaurantController'
-import { DeleteRestaurantController } from '../controllers/DeleteRestaurantController'
-import { FindRestaurantController } from '../controllers/FindRestaurantController'
+import { CreateRestaurantController } from '../controllers/restaurant/CreateRestaurantController'
+import { UpdateRestaurantController } from '../controllers/restaurant/UpdateRestaurantController'
+import { ListRestaurantController } from '../controllers/restaurant/ListRestaurantController'
+import { DeleteRestaurantController } from '../controllers/restaurant/DeleteRestaurantController'
+import { FindRestaurantController } from '../controllers/restaurant/FindRestaurantController'
 
 const restaurantsRoutes = Router()
 

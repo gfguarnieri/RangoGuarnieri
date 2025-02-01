@@ -24,6 +24,7 @@ describe('FindRestaurantUseCase', async () => {
       state: 'SP',
       neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
+      restaurantHours: [],
     }
 
     const createdRestaurant = await restaurantRepository.create(restaurantData)
@@ -37,7 +38,17 @@ describe('FindRestaurantUseCase', async () => {
     )
 
     expect(foundRestaurant).toHaveProperty('id')
-    expect(foundRestaurant).contain(restaurantData)
+    expect(foundRestaurant).contain({
+      name: restaurantData.name,
+      image: restaurantData.image,
+      address: restaurantData.address,
+      number: restaurantData.number,
+      city: restaurantData.city,
+      state: restaurantData.state,
+      neighborhood: restaurantData.neighborhood,
+      postalCode: restaurantData.postalCode,
+    })
+    expect(foundRestaurant.restaurantHours).toHaveLength(0)
   })
 
   it('should throw an error if restaurant does not exist', async () => {

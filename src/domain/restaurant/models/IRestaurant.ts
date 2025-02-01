@@ -1,3 +1,5 @@
+import { IRestaurantHours } from './IRestaurantHours'
+
 export interface IRestaurant {
   id?: string
   name: string
@@ -8,4 +10,5 @@ export interface IRestaurant {
   neighborhood: string
   address: string
   number: string
+  restaurantHours?: IRestaurantHours[]
 }

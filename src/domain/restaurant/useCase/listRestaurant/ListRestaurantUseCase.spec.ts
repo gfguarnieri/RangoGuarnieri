@@ -23,6 +23,7 @@ describe('ListRestaurantUseCase', async () => {
       state: 'SP',
       neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
+      restaurantHours: [],
     }
 
     const restaurant2: ICreateRestaurantDTO = {
@@ -34,6 +35,7 @@ describe('ListRestaurantUseCase', async () => {
       state: 'SP',
       neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
+      restaurantHours: [],
     }
 
     await restaurantRepository.create(restaurant1)

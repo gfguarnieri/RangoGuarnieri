@@ -3,7 +3,7 @@ import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaura
 import { beforeAll, describe, expect, test } from 'vitest'
 import { DeleteRestaurantUseCase } from './DeleteRestaurantUseCase'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
-import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
+import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 
 let restaurantRepository: IRestaurantRepository
 let deleteRestaurantUseCase: DeleteRestaurantUseCase
@@ -24,6 +24,7 @@ describe('DeleteRestaurantUseCase', async () => {
       state: 'SP',
       neighborhood: 'Jardim Paulista',
       postalCode: '18065-511',
+      restaurantHours: [],
     }
 
     const createdRestaurant = await restaurantRepository.create(restaurantData)
@@ -42,8 +43,8 @@ describe('DeleteRestaurantUseCase', async () => {
   })
 
   test('should throw an error if restaurant does not exist', async () => {
-    await expect(
-      deleteRestaurantUseCase.execute('non-existent-id'),
-    ).rejects.toThrowError(UseCaseValidationError)
+    await expect(deleteRestaurantUseCase.execute('123')).rejects.toThrowError(
+      NotFoundValidationError,
+    )
   })
 })

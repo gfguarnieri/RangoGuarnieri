@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto'
 import { IRestaurant } from '../models/IRestaurant'
+import { RestaurantHours } from './RestaurantHours'
 
 export class Restaurant {
   id?: string
@@ -13,6 +14,7 @@ export class Restaurant {
   neighborhood: string
   createdAt?: Date
   updatedAt?: Date
+  restaurantHours: RestaurantHours[]
 
   constructor(props: IRestaurant, id?: string) {
     this.id = id ?? randomUUID()
@@ -24,5 +26,6 @@ export class Restaurant {
     this.state = props.state
     this.postalCode = props.postalCode
     this.neighborhood = props.neighborhood
+    this.restaurantHours = props.restaurantHours ?? []
   }
 }

@@ -1,15 +1,14 @@
-import { FindRestaurantUseCase } from '@domain/restaurant/useCase/findRestaurant/FindRestaurantUseCase'
+import { DeleteRestaurantUseCase } from '@domain/restaurant/useCase/deleteRestaurant/DeleteRestaurantUseCase'
 import { Request, Response } from 'express'
-import { StatusCodes } from 'http-status-codes'
-import { ValidationResources } from 'shared/resources/ValidationResources'
 import { container } from 'tsyringe'
-import { z } from 'zod'
+import { StatusCodes } from 'http-status-codes'
+import { z } from '@zod/i18n'
 
 const schema = z.object({
-  id: z.string().uuid(ValidationResources.invalidUUID),
+  id: z.string().uuid(),
 })
 
-export class FindRestaurantController {
+export class DeleteRestaurantController {
   async handle(request: Request, response: Response): Promise<Response> {
     const validationResult = schema.safeParse(request.params)
 
@@ -22,9 +21,8 @@ export class FindRestaurantController {
 
     const { id } = validationResult.data
 
-    const findRestaurantUseCase = container.resolve(FindRestaurantUseCase)
-    const restaurant = await findRestaurantUseCase.execute(id)
-
+    const deleteRestaurantUseCase = container.resolve(DeleteRestaurantUseCase)
+    const restaurant = await deleteRestaurantUseCase.execute(id)
     return response.status(StatusCodes.OK).json(restaurant)
   }
 }

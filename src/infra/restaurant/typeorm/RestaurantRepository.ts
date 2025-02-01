@@ -49,7 +49,7 @@ export class RestaurantRepository implements IRestaurantRepository {
     const query = await RangoDataSource.query(
       `UPDATE restaurant 
             SET name = $1, image = $2, address = $3, city = $4, 
-            neighborhood = $5, number = $6, postalCode = $7, state = $8
+            neighborhood = $5, number = $6, postalCode = $7, state = $8, updated_at = NOW() 
             WHERE id = $9`,
       [
         restaurant.name,
@@ -77,7 +77,18 @@ export class RestaurantRepository implements IRestaurantRepository {
 
   async findById(id: string): Promise<Restaurant | undefined> {
     const rows = (await RangoDataSource.query(
-      `SELECT * FROM restaurant WHERE id = $1`,
+      `SELECT 
+        id,
+        name, 
+        address,
+        neighborhood,
+        number,
+        city,
+        state,
+        postalCode,
+        created_at as "createdAt",
+        updated_at as "updatedAt"
+      FROM restaurant WHERE id = $1`,
       [id],
     )) as Restaurant[]
 
@@ -88,7 +99,20 @@ export class RestaurantRepository implements IRestaurantRepository {
   }
 
   async list(): Promise<Restaurant[]> {
-    const rows = await RangoDataSource.query(`SELECT * FROM restaurant`)
+    const rows = await RangoDataSource.query(
+      `SELECT 
+        id,
+        name, 
+        address,
+        neighborhood,
+        number,
+        city,
+        state,
+        postalCode,
+        created_at as "createdAt",
+        updated_at as "updatedAt"
+      FROM restaurant`,
+    )
     const restaurants = rows as Restaurant[]
     return restaurants
   }
