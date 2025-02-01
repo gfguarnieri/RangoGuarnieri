@@ -3,12 +3,23 @@
 :warning: **Readme em construção** :construction:
 
 ### :memo: Funcionalidades
-- [ ] Restaurantes
-    - [ ] O sistema deve permitir o cadastro de restaurantes
-    - [ ] O sistema deve permitir a alteração de restaurantes
-    - [ ] O sistema deve permitir a exclusão de restaurantes
-    - [ ] O sistema deve permitir a listagem de restaurantes
-    - [ ] O sistema deve permitir a busca de restaurante pelo Id
+- [x] Restaurantes
+    - [x] O sistema deve permitir o cadastro de restaurantes
+    - [x] O sistema deve permitir a alteração de restaurantes
+    - [x] O sistema deve permitir a exclusão de restaurantes
+    - [x] O sistema deve permitir a listagem de restaurantes
+    - [x] O sistema deve permitir a busca de restaurante pelo Id
+    - [x] O sistema deve permitir o cadastro de horário de funcionamento do restaurante
+    - [x] O sistema deve permitir a alteração de horário de funcionamento do restaurante
+
+- [ ] Produtos
+    - [ ] O sistema deve permitir o cadastro de produtos
+    - [ ] O sistema deve permitir a alteração de produtos
+    - [ ] O sistema deve permitir a exclusão de produtos
+    - [ ] O sistema deve permitir a listagem de produtos pelo restaurante
+    - [ ] O sistema deve permitir a busca de produto pelo Id
+    - [ ] O sistema deve permitir adicionar um produto em promoção
+
 
 ### RFN - Requisitos não Funcionais 
 - O sistema deve ser desenvolvido em NodeJS
@@ -37,6 +48,7 @@ Para configurar as variáveis de ambiente, crie um arquivo `.env` na raiz do pro
 #### Scripts
 - `npm run dev`: Inicia o servidor em modo de desenvolvimento
 - `npm run test`: Executa os testes unitários
+- `npm run db-dev`: Inicia o banco de dados em modo de desenvolvimento com base no arquivo `.env.dev`
 
 #### Banco de Dados (Docker)
 
@@ -51,14 +63,12 @@ Para instalar as dependências do projeto, execute o comando abaixo:
 `npm install`
 
 ### Dependências
-- [NodeJS](https://nodejs.org/en/)
-- [Express](https://github.com/expressjs/express)
-    - Framework para desenvolvimento de aplicações web
-- [Tsrynge](https://github.com/microsoft/tsyringe)
-    - Injeção de dependência
-- [TypeORM](https://github.com/typeorm/typeorm)
-    - Usado apenas para conexão com o banco de dados
-- [Vitest](https://github.com/vitest-dev/vitest)
-    - Criação de testes automatizados
-- [http-status-codes](https://github.com/prettymuchbryce/http-status-codes)
-    - Para enums contendo os códigos de status HTTP
+[NodeJS](https://nodejs.org/en/) - Ambiente de execução JavaScript
+[Express](https://github.com/expressjs/express) - Framework para desenvolvimento de aplicações web
+[Tsrynge](https://github.com/microsoft/tsyringe) - Injeção de dependência
+[TypeORM](https://github.com/typeorm/typeorm) - Usado apenas para conexão com o banco de dados
+[Vitest](https://github.com/vitest-dev/vitest) - Criação de testes automatizados
+[http-status-codes](https://github.com/prettymuchbryce/http-status-codes) - Para enums contendo os códigos de status HTTP
+[dotenv](https://github.com/motdotla/dotenv) - Para carregar variáveis de ambiente
+[Zod](https://github.com/colinhacks/zod) - Para validação de dados
+
