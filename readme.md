@@ -5,7 +5,9 @@
 ### :memo: Funcionalidades
 - [x] Restaurantes
     - [x] O sistema deve permitir o cadastro de restaurantes
+    - [x] O sistema deve permitir o cadastro de imagem do restaurante
     - [x] O sistema deve permitir a alteração de restaurantes
+    - [x] O sistema deve permitir a alteração da imagem do restaurante
     - [x] O sistema deve permitir a exclusão de restaurantes
     - [x] O sistema deve permitir a listagem de restaurantes
     - [x] O sistema deve permitir a busca de restaurante pelo Id
@@ -14,11 +16,14 @@
 
 - [ ] Produtos
     - [ ] O sistema deve permitir o cadastro de produtos
+    - [ ] O sistema deve permitir o cadastro de imagem do produto
     - [ ] O sistema deve permitir a alteração de produtos
+    - [ ] O sistema deve permitir a alteração da imagem do produto
     - [ ] O sistema deve permitir a exclusão de produtos
     - [ ] O sistema deve permitir a listagem de produtos pelo restaurante
     - [ ] O sistema deve permitir a busca de produto pelo Id
     - [ ] O sistema deve permitir adicionar um produto em promoção
+    - [ ] O sistema deve permitir remover um produto da promoção
 
 
 ### RFN - Requisitos não Funcionais 

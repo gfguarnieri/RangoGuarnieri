@@ -1,6 +1,6 @@
+import { IUpdateRestaurantImageDTO } from '@domain/restaurant/dtos/IUpdateRestaurantImageDTO'
 import { RestaurantBucket } from '@domain/restaurant/models/IRestaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
-import { IFileUploaded } from 'domain/core/models/IFileUploaded'
 import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
@@ -21,10 +21,10 @@ export class UpdateRestauranteImageUseCase {
     private storageProvider: IStorageProvider,
   ) {}
 
-  async execute(
-    restaurantId: string,
-    file: IFileUploaded,
-  ): Promise<IResponseImageRestaurant | undefined> {
+  async execute({
+    restaurantId,
+    file,
+  }: IUpdateRestaurantImageDTO): Promise<IResponseImageRestaurant | undefined> {
     if (!file || !file.filebuffer || !file.filemime) {
       throw new UseCaseValidationError('Image is required')
     }

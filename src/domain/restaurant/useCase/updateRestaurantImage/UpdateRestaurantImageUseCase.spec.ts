@@ -41,15 +41,15 @@ describe('UpdateRestaurantImageUseCase', () => {
     }
 
     const file: IFileUploaded = {
-      filename: 'new-image.jpg',
+      filename: '123.jpg',
       filebuffer: Buffer.from(''),
       filemime: 'image/jpeg',
     }
 
-    const response = await updateRestaurantImageUseCase.execute(
-      createdRestaurant.id,
+    const response = await updateRestaurantImageUseCase.execute({
+      restaurantId: createdRestaurant.id,
       file,
-    )
+    })
 
     expect(response).toHaveProperty('id')
     expect(response).toHaveProperty('image', file.filename)
@@ -57,13 +57,16 @@ describe('UpdateRestaurantImageUseCase', () => {
 
   it('should throw an error if restaurant does not exist', async () => {
     const file: IFileUploaded = {
-      filename: 'new-image.jpg',
+      filename: 'image.jpg',
       filebuffer: Buffer.from(''),
       filemime: 'image/jpeg',
     }
 
     await expect(
-      updateRestaurantImageUseCase.execute('non-existent-id', file),
+      updateRestaurantImageUseCase.execute({
+        restaurantId: '123',
+        file,
+      }),
     ).rejects.toThrowError(UseCaseValidationError)
   })
 
@@ -87,10 +90,14 @@ describe('UpdateRestaurantImageUseCase', () => {
     }
 
     await expect(
-      updateRestaurantImageUseCase.execute(
-        createdRestaurant.id,
-        {} as IFileUploaded,
-      ),
+      updateRestaurantImageUseCase.execute({
+        restaurantId: createdRestaurant.id,
+        file: {
+          filename: '',
+          filebuffer: Buffer.from(''),
+          filemime: '',
+        },
+      }),
     ).rejects.toThrowError(UseCaseValidationError)
   })
 })

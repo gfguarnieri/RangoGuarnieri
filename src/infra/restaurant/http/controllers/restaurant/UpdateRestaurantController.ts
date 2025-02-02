@@ -30,7 +30,6 @@ const requestSchema = z.object({
 export class UpdateRestaurantController {
   async handle(request: Request, response: Response): Promise<Response> {
     const validationResult = requestSchema.safeParse(request)
-    const file = request.file
 
     if (!validationResult.success) {
       return response.status(StatusCodes.BAD_REQUEST).json({
@@ -44,7 +43,7 @@ export class UpdateRestaurantController {
 
     const restaurant = await updateRestaurantUseCase.execute(
       requestData.params.id,
-      { ...requestData.body, image: file ? file.filename : '' },
+      { ...requestData.body },
     )
 
     return response.status(StatusCodes.OK).json(restaurant)

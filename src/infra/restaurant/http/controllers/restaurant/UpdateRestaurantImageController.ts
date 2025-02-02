@@ -16,10 +16,13 @@ export class UpdateRestauranteImageController {
         message: 'Image is required',
       })
     }
-    const restaurant = await updateRestaurantImageUseCase.execute(id, {
-      filebuffer: file.buffer,
-      filemime: file.mimetype,
-      filename: file.filename,
+    const restaurant = await updateRestaurantImageUseCase.execute({
+      restaurantId: id,
+      file: {
+        filebuffer: file.buffer,
+        filemime: file.mimetype,
+        filename: file.filename,
+      },
     })
     return response.status(StatusCodes.OK).send(restaurant)
   }
