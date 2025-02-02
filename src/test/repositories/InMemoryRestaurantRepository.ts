@@ -1,5 +1,4 @@
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
-import { IUpdateRestaurantDTO } from '@domain/restaurant/dtos/IUpdateRestaurantDTO'
 import { Restaurant } from '@domain/restaurant/entities/Restaurant'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 
@@ -35,14 +34,13 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
     id: string,
     {
       name,
-      image,
       address,
       city,
       neighborhood,
       number,
       postalCode,
       state,
-    }: IUpdateRestaurantDTO,
+    }: Omit<Restaurant, 'image'>,
   ) {
     const itemIndex = this.restaurants.findIndex(
       (restaurant) => restaurant.id === id,
@@ -52,7 +50,6 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
 
     Object.assign(this.restaurants[itemIndex], {
       name,
-      image,
       address,
       city,
       neighborhood,
@@ -76,5 +73,25 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
     this.restaurants = this.restaurants.filter(
       (restaurant) => restaurant.id !== id,
     )
+  }
+
+  updateImage(
+    id: string,
+    image: string,
+  ): Promise<Pick<Restaurant, 'id' | 'image'>> {
+    const itemIndex = this.restaurants.findIndex(
+      (restaurant) => restaurant.id === id,
+    )
+
+    if (itemIndex < 0) {
+      throw new Error('Restaurant not found')
+    }
+
+    this.restaurants[itemIndex].image = image
+
+    return Promise.resolve({
+      id,
+      image,
+    })
   }
 }

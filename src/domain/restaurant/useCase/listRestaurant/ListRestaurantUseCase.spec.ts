@@ -3,14 +3,20 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { ListRestaurantUseCase } from './ListRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
+import { InMemoryStorageProvider } from 'test/repositories/InMemoryStorageProvider'
 
 let restaurantRepository: InMemoryRestaurantRepository
+let storageProvider: InMemoryStorageProvider
 let listRestaurantUseCase: ListRestaurantUseCase
 
 describe('ListRestaurantUseCase', async () => {
   beforeEach(async () => {
     restaurantRepository = new InMemoryRestaurantRepository()
-    listRestaurantUseCase = new ListRestaurantUseCase(restaurantRepository)
+    storageProvider = new InMemoryStorageProvider()
+    listRestaurantUseCase = new ListRestaurantUseCase(
+      restaurantRepository,
+      storageProvider,
+    )
   })
 
   it('should list all restaurants', async () => {

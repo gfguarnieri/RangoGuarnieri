@@ -5,7 +5,7 @@ import { RestaurantHours } from './RestaurantHours'
 export class Restaurant {
   id?: string
   name: string
-  image: string
+  image?: string
   address: string
   number: string
   city: string

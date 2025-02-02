@@ -6,8 +6,12 @@ export interface IRestaurantRepository {
   create(restaurant: ICreateRestaurantDTO): Promise<Restaurant>
   update(
     id: string,
-    restaurant: IUpdateRestaurantDTO,
+    restaurant: Omit<IUpdateRestaurantDTO, 'image'>,
   ): Promise<Restaurant | undefined>
+  updateImage(
+    id: string,
+    image: string,
+  ): Promise<Pick<Restaurant, 'id' | 'image'>>
   findById(id: string): Promise<Restaurant | undefined>
   list(): Promise<Restaurant[]>
   delete(id: string): Promise<void>

@@ -1,9 +1,11 @@
 import { IRestaurantHours } from './IRestaurantHours'
 
+export const RestaurantBucket = 'restaurants'
+
 export interface IRestaurant {
   id?: string
   name: string
-  image: string
+  image?: string
   state: string
   city: string
   postalCode: string

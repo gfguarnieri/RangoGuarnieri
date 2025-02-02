@@ -18,7 +18,7 @@ export class UpdateRestauranteUseCase {
 
   async execute(
     id: string,
-    input: IUpdateRestaurantDTO,
+    input: Omit<IUpdateRestaurantDTO, 'image'>,
   ): Promise<Restaurant | undefined> {
     if (input.restaurantHours) {
       validateAllHours(input.restaurantHours)
@@ -30,7 +30,9 @@ export class UpdateRestauranteUseCase {
       throw new NotFoundValidationError('Restaurant not found')
     }
 
-    const restaurant = await this.restaurantRepository.update(id, input)
+    await this.restaurantRepository.update(id, input)
+
+    const restaurant = await this.restaurantRepository.findById(id)
 
     if (!restaurant || !restaurant.id) {
       throw new NotFoundValidationError('Error on update')

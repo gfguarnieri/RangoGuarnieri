@@ -7,7 +7,6 @@ import { z } from '@zod/i18n'
 
 const schema = z.object({
   name: z.string().max(100).nonempty(),
-  image: z.string().max(255).nonempty(),
   address: z.string().max(150).nonempty(),
   city: z.string().max(50).nonempty(),
   neighborhood: z.string().max(50).nonempty(),
@@ -40,7 +39,9 @@ export class CreateRestaurantController {
 
     const createRestaurantUseCase = container.resolve(CreateRestauranteUseCase)
 
-    const restaurant = await createRestaurantUseCase.execute(params)
+    const restaurant = await createRestaurantUseCase.execute({
+      ...params,
+    })
 
     return response.status(StatusCodes.CREATED).json(restaurant)
   }

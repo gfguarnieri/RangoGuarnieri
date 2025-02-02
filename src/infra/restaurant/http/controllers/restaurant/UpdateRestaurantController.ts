@@ -11,7 +11,6 @@ const requestSchema = z.object({
   }),
   body: z.object({
     name: z.string().max(100).nonempty(),
-    image: z.string().max(255).nonempty(),
     address: z.string().max(150).nonempty(),
     city: z.string().max(50).nonempty(),
     neighborhood: z.string().max(50).nonempty(),
@@ -31,6 +30,7 @@ const requestSchema = z.object({
 export class UpdateRestaurantController {
   async handle(request: Request, response: Response): Promise<Response> {
     const validationResult = requestSchema.safeParse(request)
+    const file = request.file
 
     if (!validationResult.success) {
       return response.status(StatusCodes.BAD_REQUEST).json({
@@ -44,7 +44,7 @@ export class UpdateRestaurantController {
 
     const restaurant = await updateRestaurantUseCase.execute(
       requestData.params.id,
-      requestData.body,
+      { ...requestData.body, image: file ? file.filename : '' },
     )
 
     return response.status(StatusCodes.OK).json(restaurant)

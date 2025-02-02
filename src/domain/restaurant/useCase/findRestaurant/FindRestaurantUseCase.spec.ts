@@ -7,25 +7,29 @@ import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantD
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { InMemoryRestaurantHoursRepository } from 'test/repositories/InMemoryRestaurantHoursRepository'
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
+import { InMemoryStorageProvider } from 'test/repositories/InMemoryStorageProvider'
 
 let restaurantRepository: IRestaurantRepository
 let restaurantHoursRepository: IRestaurantHoursRepository
+let storageProvider: IStorageProvider
 let findRestaurantUseCase: FindRestaurantUseCase
 
 describe('FindRestaurantUseCase', async () => {
   beforeAll(async () => {
     restaurantRepository = new InMemoryRestaurantRepository()
     restaurantHoursRepository = new InMemoryRestaurantHoursRepository()
+    storageProvider = new InMemoryStorageProvider()
     findRestaurantUseCase = new FindRestaurantUseCase(
       restaurantRepository,
       restaurantHoursRepository,
+      storageProvider,
     )
   })
 
   it('should find a restaurant by id', async () => {
     const restaurantData: ICreateRestaurantDTO = {
       name: 'Restaurante Guarnieri',
-      image: 'guarnieri-logo',
       address: 'Rua José',
       number: '123',
       city: 'Sorocaba',
@@ -48,7 +52,6 @@ describe('FindRestaurantUseCase', async () => {
     expect(foundRestaurant).toHaveProperty('id')
     expect(foundRestaurant).contain({
       name: restaurantData.name,
-      image: restaurantData.image,
       address: restaurantData.address,
       number: restaurantData.number,
       city: restaurantData.city,

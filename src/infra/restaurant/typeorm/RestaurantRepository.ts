@@ -45,15 +45,14 @@ export class RestaurantRepository implements IRestaurantRepository {
   async update(
     id: string,
     restaurant: IUpdateRestaurantDTO,
-  ): Promise<Restaurant | undefined> {
+  ): Promise<Omit<Restaurant, 'image'> | undefined> {
     const query = await RangoDataSource.query(
       `UPDATE restaurant 
-            SET name = $1, image = $2, address = $3, city = $4, 
-            neighborhood = $5, number = $6, postalCode = $7, state = $8, updated_at = NOW() 
-            WHERE id = $9`,
+            SET name = $1, address = $2, city = $3, 
+            neighborhood = $4, number = $5, postalCode = $6, state = $7, updated_at = NOW() 
+            WHERE id = $8`,
       [
         restaurant.name,
-        restaurant.image,
         restaurant.address,
         restaurant.city,
         restaurant.neighborhood,
@@ -79,13 +78,14 @@ export class RestaurantRepository implements IRestaurantRepository {
     const rows = (await RangoDataSource.query(
       `SELECT 
         id,
+        image,
         name, 
         address,
         neighborhood,
         number,
         city,
         state,
-        postalCode,
+        postalCode as "postalCode",
         created_at as "createdAt",
         updated_at as "updatedAt"
       FROM restaurant WHERE id = $1`,
@@ -102,6 +102,7 @@ export class RestaurantRepository implements IRestaurantRepository {
     const rows = await RangoDataSource.query(
       `SELECT 
         id,
+        image,
         name, 
         address,
         neighborhood,
@@ -126,5 +127,23 @@ export class RestaurantRepository implements IRestaurantRepository {
     if (rowsAffected === 0) {
       throw new RepositoryError('Restaurant not found')
     }
+  }
+
+  async updateImage(
+    id: string,
+    image: string,
+  ): Promise<Pick<Restaurant, 'id' | 'image'>> {
+    const query = await RangoDataSource.query(
+      `UPDATE restaurant SET image = $1 WHERE id = $2`,
+      [image, id],
+    )
+
+    const rowsAffected = query[1]
+
+    if (rowsAffected === 0) {
+      throw new RepositoryError('Restaurant not found')
+    }
+
+    return { id, image }
   }
 }

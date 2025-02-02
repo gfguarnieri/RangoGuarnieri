@@ -42,7 +42,6 @@ describe('UpdateRestaurantUseCase', async () => {
 
     const updateData: ICreateRestaurantDTO = {
       name: 'Restaurante Giovanni',
-      image: 'giovanni-logo',
       address: 'Rua José',
       number: '123',
       city: 'Sorocaba',
@@ -59,7 +58,6 @@ describe('UpdateRestaurantUseCase', async () => {
 
     expect(updatedRestaurant).toHaveProperty('id')
     expect(updatedRestaurant?.name).toBe(updateData.name)
-    expect(updatedRestaurant?.image).toBe(updateData.image)
   })
 
   it('should throw an error if restaurant does not exist', async () => {

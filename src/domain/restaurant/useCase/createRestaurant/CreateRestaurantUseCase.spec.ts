@@ -8,7 +8,6 @@ import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let restaurantHoursRepository: InMemoryRestaurantHoursRepository
-
 let createRestaurantUseCase: CreateRestauranteUseCase
 
 describe('CreateRestaurantUseCase', async () => {
