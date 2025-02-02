@@ -1,4 +1,4 @@
-import { DeleteRestaurantUseCase } from '@domain/restaurant/useCase/deleteRestaurant/DeleteRestaurantUseCase'
+import { DeleteRestaurantUseCase } from '@domain/restaurant/useCases/deleteRestaurant/DeleteRestaurantUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'

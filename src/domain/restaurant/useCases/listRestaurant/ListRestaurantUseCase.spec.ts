@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { ListRestaurantUseCase } from './ListRestaurantUseCase'
-import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
+import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
-import { InMemoryStorageProvider } from 'test/repositories/InMemoryStorageProvider'
+import { InMemoryStorageProvider } from 'test/providers/InMemoryStorageProvider'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let storageProvider: InMemoryStorageProvider

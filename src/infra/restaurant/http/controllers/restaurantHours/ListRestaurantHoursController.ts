@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'
 import { z } from '@zod/i18n'
-import { ListRestaurantHoursUseCase } from '@domain/restaurant/useCase/listRestaurantHours/ListRestaurantHoursUseCase'
+import { ListRestaurantHoursUseCase } from '@domain/restaurant/useCases/listRestaurantHours/ListRestaurantHoursUseCase'
 
 const requestSchema = z.object({
   params: z.object({

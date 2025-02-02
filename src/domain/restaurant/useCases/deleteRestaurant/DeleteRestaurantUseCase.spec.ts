@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
+import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { beforeAll, describe, expect, test } from 'vitest'
 import { DeleteRestaurantUseCase } from './DeleteRestaurantUseCase'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'

@@ -1,4 +1,4 @@
-import { CreateRestauranteUseCase } from '@domain/restaurant/useCase/createRestaurant/CreateRestaurantUseCase'
+import { CreateRestauranteUseCase } from '@domain/restaurant/useCases/createRestaurant/CreateRestaurantUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'

@@ -1,4 +1,4 @@
-import { ListRestaurantUseCase } from '@domain/restaurant/useCase/listRestaurant/ListRestaurantUseCase'
+import { ListRestaurantUseCase } from '@domain/restaurant/useCases/listRestaurant/ListRestaurantUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'

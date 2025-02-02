@@ -15,6 +15,10 @@
     - [x] O sistema deve permitir a alteração de horário de funcionamento do restaurante
 
 - [ ] Produtos
+    - [ ] O sistema deve permitir o cadastro de categorias de produtos
+    - [ ] O sistema deve permitir a alteração de categorias de produtos
+    - [ ] O sistema deve permitir a exclusão de categorias de produtos
+    - [ ] O sistema deve permitir a listagem de categorias de produtos
     - [ ] O sistema deve permitir o cadastro de produtos
     - [ ] O sistema deve permitir o cadastro de imagem do produto
     - [ ] O sistema deve permitir a alteração de produtos
@@ -24,7 +28,6 @@
     - [ ] O sistema deve permitir a busca de produto pelo Id
     - [ ] O sistema deve permitir adicionar um produto em promoção
     - [ ] O sistema deve permitir remover um produto da promoção
-
 
 ### RFN - Requisitos não Funcionais 
 - O sistema deve ser desenvolvido em NodeJS
@@ -36,6 +39,10 @@
 - Não utilizar query builder 
 - Utilizar raw query para as consultas no banco de dados
 
+### Melhorias Futuras 
+- [ ] Criar rotas de pesquisa (/search) para restaurantes e produtos com filtros e paginação
+- [ ] Criar novo provider de Armazenamento de arquivos na nuvem (AWS S3)
+- [ ] As validações simples de dados já estão traduzidas (Zod i18n), mas as validações de caso de uso estão em inglês. Criar resources para tradução das mensagens de erro.
 
 ### Configuração do ambiente
 Para configurar o ambiente é necessário ter:

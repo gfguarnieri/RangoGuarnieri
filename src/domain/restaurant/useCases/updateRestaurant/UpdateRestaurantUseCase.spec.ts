@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 import { UpdateRestauranteUseCase } from './UpdateRestaurantUseCase'
-import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
+import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
-import { InMemoryRestaurantHoursRepository } from 'test/repositories/InMemoryRestaurantHoursRepository'
+import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
 
 let restaurantRepository: InMemoryRestaurantRepository
 let restaurantHoursRepository: InMemoryRestaurantHoursRepository

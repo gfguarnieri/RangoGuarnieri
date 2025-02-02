@@ -1,4 +1,4 @@
-import { UpdateRestauranteUseCase } from '@domain/restaurant/useCase/updateRestaurant/UpdateRestaurantUseCase'
+import { UpdateRestauranteUseCase } from '@domain/restaurant/useCases/updateRestaurant/UpdateRestaurantUseCase'
 import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'

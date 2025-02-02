@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { CreateRestauranteUseCase } from './CreateRestaurantUseCase'
-import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
+import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
-import { InMemoryRestaurantHoursRepository } from 'test/repositories/InMemoryRestaurantHoursRepository'
+import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
 import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 
 let restaurantRepository: InMemoryRestaurantRepository

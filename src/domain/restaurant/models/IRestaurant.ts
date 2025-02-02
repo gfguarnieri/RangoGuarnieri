@@ -13,4 +13,6 @@ export interface IRestaurant {
   address: string
   number: string
   restaurantHours?: IRestaurantHours[]
+  createdAt?: Date
+  updatedAt?: Date
 }

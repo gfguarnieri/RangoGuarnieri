@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { UpdateAllRestaurantHoursUseCase } from './UpdateAllRestaurantHoursUseCase'
-import { InMemoryRestaurantHoursRepository } from 'test/repositories/InMemoryRestaurantHoursRepository'
-import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
+import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
+import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import {
   DayOfWeek,

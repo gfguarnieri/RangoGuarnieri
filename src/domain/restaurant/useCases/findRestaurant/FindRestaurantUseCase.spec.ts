@@ -1,14 +1,14 @@
 import 'reflect-metadata'
 import { FindRestaurantUseCase } from './FindRestaurantUseCase'
-import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
+import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
-import { InMemoryRestaurantHoursRepository } from 'test/repositories/InMemoryRestaurantHoursRepository'
+import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
 import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
-import { InMemoryStorageProvider } from 'test/repositories/InMemoryStorageProvider'
+import { InMemoryStorageProvider } from 'test/providers/InMemoryStorageProvider'
 
 let restaurantRepository: IRestaurantRepository
 let restaurantHoursRepository: IRestaurantHoursRepository

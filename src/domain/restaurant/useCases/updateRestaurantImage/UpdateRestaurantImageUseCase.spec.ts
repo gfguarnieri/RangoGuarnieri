@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { UpdateRestauranteImageUseCase } from './UpdateRestaurantImageUseCase'
-import { InMemoryRestaurantRepository } from 'test/repositories/InMemoryRestaurantRepository'
-import { InMemoryStorageProvider } from 'test/repositories/InMemoryStorageProvider'
+import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
+import { InMemoryStorageProvider } from 'test/providers/InMemoryStorageProvider'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
-import { IFileUploaded } from '../../../../domain/core/models/IFileUploaded'
+import { IFileUploaded } from '../../../core/models/IFileUploaded'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 
 let restaurantRepository: InMemoryRestaurantRepository

@@ -1,5 +1,5 @@
 import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
-import { UpdateAllRestaurantHoursUseCase } from '@domain/restaurant/useCase/updateAllRestaurantHours/UpdateAllRestaurantHoursUseCase'
+import { UpdateAllRestaurantHoursUseCase } from '@domain/restaurant/useCases/updateAllRestaurantHours/UpdateAllRestaurantHoursUseCase'
 import { z } from '@zod/i18n'
 import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'

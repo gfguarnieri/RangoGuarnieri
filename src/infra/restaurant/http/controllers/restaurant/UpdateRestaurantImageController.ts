@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { UpdateRestauranteImageUseCase } from '@domain/restaurant/useCase/updateRestaurantImage/UpdateRestaurantImageUseCase'
+import { UpdateRestauranteImageUseCase } from '@domain/restaurant/useCases/updateRestaurantImage/UpdateRestaurantImageUseCase'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'
 
