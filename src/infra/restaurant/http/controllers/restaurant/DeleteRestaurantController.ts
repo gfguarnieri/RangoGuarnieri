@@ -23,6 +23,6 @@ export class DeleteRestaurantController {
 
     const deleteRestaurantUseCase = container.resolve(DeleteRestaurantUseCase)
     const restaurant = await deleteRestaurantUseCase.execute(id)
-    return response.status(StatusCodes.OK).json(restaurant)
+    return response.status(StatusCodes.NO_CONTENT).json(restaurant)
   }
 }

@@ -9,7 +9,7 @@ import { inject, injectable } from 'tsyringe'
 @injectable()
 export class UpdateCategoryUseCase {
   constructor(
-    @inject(DependencyInjectionTokens.RestaurantHoursRepository)
+    @inject(DependencyInjectionTokens.CategoryRepository)
     private categoryRepository: ICategoryRepository,
     @inject(DependencyInjectionTokens.RestaurantRepository)
     private restaurantRepository: IRestaurantRepository,

@@ -17,11 +17,11 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
     return this.categories
   }
 
-  async findCategoryById(id: string): Promise<ICategory | undefined> {
+  async findById(id: string): Promise<ICategory | undefined> {
     return this.categories.find((category) => category.id === id)
   }
 
-  async findCategoryByRestaurantId(restaurantId: string): Promise<ICategory[]> {
+  async findByRestaurantId(restaurantId: string): Promise<ICategory[]> {
     return this.categories.filter(
       (category) => category.restaurantId === restaurantId,
     )

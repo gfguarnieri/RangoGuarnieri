@@ -10,13 +10,13 @@ export class DeleteRestaurantUseCase {
     private restaurantRepository: IRestaurantRepository,
   ) {}
 
-  async execute(id: string) {
+  async execute(id: string): Promise<void> {
     const restaurant = await this.restaurantRepository.findById(id)
 
     if (!restaurant) {
       throw new NotFoundValidationError('Restaurant not found')
     }
 
-    return this.restaurantRepository.delete(id)
+    await this.restaurantRepository.delete(id)
   }
 }
