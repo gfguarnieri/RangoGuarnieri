@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { container } from 'tsyringe'
 import { z } from '@zod/i18n'
-import { UpdateCategoryUseCase } from 'domain/product/useCases/UpdateCategory/UpdateCategoryUseCase'
+import { UpdateCategoryUseCase } from 'domain/product/useCases/updateCategory/UpdateCategoryUseCase'
 
 const schema = z.object({
   params: z.object({

@@ -1,4 +1,4 @@
-import { CreateCategoryUseCase } from 'domain/product/useCases/CreateCategory/CreateCategoryUseCase'
+import { CreateCategoryUseCase } from 'domain/product/useCases/createCategory/CreateCategoryUseCase'
 import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { container } from 'tsyringe'
