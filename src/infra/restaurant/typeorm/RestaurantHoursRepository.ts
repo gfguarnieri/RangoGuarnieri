@@ -63,7 +63,14 @@ export class RestaurantHoursRepository implements IRestaurantHoursRepository {
 
   async findById(id: string): Promise<RestaurantHours | undefined> {
     const rows = (await RangoDataSource.query(
-      `SELECT * FROM restaurant_hours WHERE id = $1`,
+      `SELECT
+        id, 
+        restaurant_id as "restaurantId",
+        day_of_week as "dayOfWeek", 
+        opening_time as "openingTime", 
+        closing_time as "closingTime",
+        created_at as "createdAt"
+      FROM restaurant_hours WHERE id = $1`,
       [id],
     )) as RestaurantHours[]
 
