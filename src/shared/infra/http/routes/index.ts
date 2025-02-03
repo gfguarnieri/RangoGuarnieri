@@ -7,6 +7,7 @@ const router = Router()
 
 router.use('/restaurants', restaurantsRoutes)
 router.use('/restaurant-hours', restaurantsHoursRoutes)
+
 router.use('/categories', categoriesRoutes)
 
 export { router }
