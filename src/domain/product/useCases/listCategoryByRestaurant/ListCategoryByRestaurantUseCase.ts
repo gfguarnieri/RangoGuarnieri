@@ -22,7 +22,7 @@ export class ListCategoryByRestaurantUseCase {
     }
 
     const categories =
-      await this.categoryRepository.findByRestaurantId(restaurantId)
+      await this.categoryRepository.listByRestaurantId(restaurantId)
 
     return categories
   }

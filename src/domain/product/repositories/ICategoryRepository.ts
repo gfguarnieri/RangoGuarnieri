@@ -6,7 +6,7 @@ export interface ICategoryRepository {
   create(data: ICreateCategoryDTO): Promise<ICategory>
   list(): Promise<ICategory[]>
   findById(id: string): Promise<ICategory | undefined>
-  findByRestaurantId(restaurantId: string): Promise<ICategory[]>
+  listByRestaurantId(restaurantId: string): Promise<ICategory[]>
   update(id: string, data: IUpdateCategoryDTO): Promise<ICategory | undefined>
   delete(id: string): Promise<void>
 }

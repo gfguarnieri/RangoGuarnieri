@@ -1,14 +1,16 @@
 import { ICategory } from './ICategory'
 
-export interface Product {
+export const ProductBucket = 'products'
+
+export interface IProduct {
   id?: string
-  restaurant_id: string
+  restaurantId: string
+  categoryId: string
+  category?: ICategory
   name: string
   description: string
   price: number
   image?: string
-  category_id?: string
-  category?: ICategory
   createdAt?: Date
   updatedAt?: Date
 }

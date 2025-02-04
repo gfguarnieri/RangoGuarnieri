@@ -21,7 +21,7 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
     return this.categories.find((category) => category.id === id)
   }
 
-  async findByRestaurantId(restaurantId: string): Promise<ICategory[]> {
+  async listByRestaurantId(restaurantId: string): Promise<ICategory[]> {
     return this.categories.filter(
       (category) => category.restaurantId === restaurantId,
     )

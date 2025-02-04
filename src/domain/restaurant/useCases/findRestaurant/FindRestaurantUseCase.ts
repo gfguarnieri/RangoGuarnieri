@@ -25,9 +25,6 @@ export class FindRestaurantUseCase {
       throw new UseCaseValidationError('Restaurant not found')
     }
 
-    const hours = await this.restaurantHoursRepository.listByRestaurantId(id)
-    restaurant.restaurantHours = hours
-
     if (restaurant.image) {
       restaurant.image = this.storageProvider.getUrl(
         restaurant.image,

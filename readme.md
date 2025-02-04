@@ -17,9 +17,9 @@
 - [ ] Produtos
     - [x] O sistema deve permitir o cadastro de categorias de produtos
     - [x] O sistema deve permitir a alteração de categorias de produtos
-    - [ ] O sistema deve permitir a exclusão de categorias de produtos
-    - [ ] O sistema deve permitir a listagem de categorias de produtos
-    - [ ] O sistema deve permitir a listagem de categorias de produtos de um restaurante
+    - [x] O sistema deve permitir a exclusão de categorias de produtos
+    - [x] O sistema deve permitir a listagem de categorias de produtos
+    - [x] O sistema deve permitir a listagem de categorias de produtos de um restaurante
     - [ ] O sistema deve permitir o cadastro de produtos
     - [ ] O sistema deve permitir o cadastro de imagem do produto
     - [ ] O sistema deve permitir a alteração de produtos
