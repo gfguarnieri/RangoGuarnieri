@@ -4,14 +4,21 @@ import { beforeAll, describe, expect, test } from 'vitest'
 import { DeleteRestaurantUseCase } from './DeleteRestaurantUseCase'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
+import { InMemoryStorageProvider } from 'test/providers/InMemoryStorageProvider'
 
 let restaurantRepository: IRestaurantRepository
 let deleteRestaurantUseCase: DeleteRestaurantUseCase
+let storageProvider: IStorageProvider
 
 describe('DeleteRestaurantUseCase', async () => {
   beforeAll(async () => {
     restaurantRepository = new InMemoryRestaurantRepository()
-    deleteRestaurantUseCase = new DeleteRestaurantUseCase(restaurantRepository)
+    storageProvider = new InMemoryStorageProvider()
+    deleteRestaurantUseCase = new DeleteRestaurantUseCase(
+      restaurantRepository,
+      storageProvider,
+    )
   })
 
   test('should delete a restaurant', async () => {

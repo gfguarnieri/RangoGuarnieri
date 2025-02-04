@@ -5,9 +5,12 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
 import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
+import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 
-let restaurantRepository: InMemoryRestaurantRepository
-let restaurantHoursRepository: InMemoryRestaurantHoursRepository
+let restaurantRepository: IRestaurantRepository
+let restaurantHoursRepository: IRestaurantHoursRepository
+
 let createRestaurantUseCase: CreateRestauranteUseCase
 
 describe('CreateRestaurantUseCase', async () => {

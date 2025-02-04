@@ -5,9 +5,12 @@ import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 import { InMemoryCategoryRepository } from 'test/repositories/products/InMemoryCategoryRepository'
 import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { ICreateCategoryDTO } from 'domain/product/dtos/ICreateCategoryDTO'
+import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 
-let categoryRepository: InMemoryCategoryRepository
-let restaurantRepository: InMemoryRestaurantRepository
+let categoryRepository: ICategoryRepository
+let restaurantRepository: IRestaurantRepository
+
 let listCategoryByRestaurantUseCase: ListCategoryByRestaurantUseCase
 
 describe('ListCategoryByRestaurantUseCase', () => {

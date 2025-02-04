@@ -5,9 +5,11 @@ import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMem
 import { describe, it, expect, beforeAll } from 'vitest'
 import { IUpdateCategoryDTO } from 'domain/product/dtos/IUpdateCategoryDTO'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
+import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 
-let categoryRepository: InMemoryCategoryRepository
-let restaurantRepository: InMemoryRestaurantRepository
+let categoryRepository: ICategoryRepository
+let restaurantRepository: IRestaurantRepository
 
 let updateCategoryUseCase: UpdateCategoryUseCase
 

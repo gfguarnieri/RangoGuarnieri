@@ -6,11 +6,16 @@ import { CreateProductUseCase } from './CreateProductUseCase'
 import { InMemoryProductRepository } from 'test/repositories/products/InMemoryProductRepository'
 import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { IFileUploaded } from 'domain/core/models/IFileUploaded'
+import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
+import { IProductRepository } from 'domain/product/repositories/IProductRepository'
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
 
-let categoryRepository: InMemoryCategoryRepository
-let restaurantRepository: InMemoryRestaurantRepository
-let productRepository: InMemoryProductRepository
-let storageProvider: InMemoryStorageProvider
+let categoryRepository: ICategoryRepository
+let restaurantRepository: IRestaurantRepository
+let productRepository: IProductRepository
+let storageProvider: IStorageProvider
+
 let createProductUseCase: CreateProductUseCase
 
 describe('CreateProductUseCase', async () => {

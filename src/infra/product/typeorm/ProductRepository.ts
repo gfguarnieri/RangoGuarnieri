@@ -41,19 +41,29 @@ export class ProductRepository implements IProductRepository {
   }
 
   async list(): Promise<IProduct[]> {
-    const products = (await RangoDataSource.query(`SELECT 
-        id,
-        restaurant_id as "restaurantId",
-        category_id as "categoryId",
-        name,
-        description,
-        price,
-        image,
-        created_at as "createdAt",
-        updated_at as "updatedAt"
-        FROM product
-        ORDER BY name
-        `)) as IProduct[]
+    const products = (await RangoDataSource.query(
+      `SELECT 
+            p.id,
+            p.restaurant_id as "restaurantId",
+            p.category_id as "categoryId",
+            json_build_object(
+              'id', c.id, 
+              'name', c.name,
+              'createdAt', c.created_at,
+              'updatedAt', c.updated_at,
+              'restaurantId', c.restaurant_id
+            ) as "category",
+            p.name,
+            p.description,
+            p.price,
+            p.image,
+            p.created_at as "createdAt",
+            p.updated_at as "updatedAt"
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.id
+        ORDER BY c.name, p.name
+        `,
+    )) as IProduct[]
 
     return products
   }
@@ -61,17 +71,25 @@ export class ProductRepository implements IProductRepository {
   async findById(id: string): Promise<IProduct | undefined> {
     const rows = await RangoDataSource.query(
       `SELECT 
-        id,
-        restaurant_id as "restaurantId",
-        category_id as "categoryId",
-        name,
-        description,
-        price,
-        image,
-        created_at as "createdAt",
-        updated_at as "updatedAt"
-        FROM product
-        WHERE id = $1`,
+            p.id,
+            p.restaurant_id as "restaurantId",
+            p.category_id as "categoryId",
+            json_build_object(
+              'id', c.id, 
+              'name', c.name,
+              'createdAt', c.created_at,
+              'updatedAt', c.updated_at,
+              'restaurantId', c.restaurant_id
+            ) as "category",
+            p.name,
+            p.description,
+            p.price,
+            p.image,
+            p.created_at as "createdAt",
+            p.updated_at as "updatedAt"
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.id
+        WHERE p.id = $1`,
       [id],
     )
 

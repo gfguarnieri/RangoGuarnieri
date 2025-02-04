@@ -6,9 +6,12 @@ import { InMemoryStorageProvider } from 'test/providers/InMemoryStorageProvider'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { IFileUploaded } from '../../../core/models/IFileUploaded'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 
-let restaurantRepository: InMemoryRestaurantRepository
-let storageProvider: InMemoryStorageProvider
+let restaurantRepository: IRestaurantRepository
+let storageProvider: IStorageProvider
+
 let updateRestaurantImageUseCase: UpdateRestauranteImageUseCase
 
 describe('UpdateRestaurantImageUseCase', () => {

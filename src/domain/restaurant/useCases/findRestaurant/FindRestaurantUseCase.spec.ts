@@ -13,6 +13,7 @@ import { InMemoryStorageProvider } from 'test/providers/InMemoryStorageProvider'
 let restaurantRepository: IRestaurantRepository
 let restaurantHoursRepository: IRestaurantHoursRepository
 let storageProvider: IStorageProvider
+
 let findRestaurantUseCase: FindRestaurantUseCase
 
 describe('FindRestaurantUseCase', async () => {

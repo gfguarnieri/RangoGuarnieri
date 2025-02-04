@@ -6,6 +6,7 @@ import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/
 import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 
 let restaurantHoursRepository: IRestaurantHoursRepository
+
 let listRestaurantHoursUseCase: ListRestaurantHoursUseCase
 
 describe('ListRestaurantHoursUseCase', () => {

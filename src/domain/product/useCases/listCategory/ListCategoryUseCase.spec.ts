@@ -3,8 +3,10 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { ListCategoryUseCase } from './ListCategoryUseCase'
 import { InMemoryCategoryRepository } from 'test/repositories/products/InMemoryCategoryRepository'
 import { ICreateCategoryDTO } from 'domain/product/dtos/ICreateCategoryDTO'
+import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
 
-let categoryRepository: InMemoryCategoryRepository
+let categoryRepository: ICategoryRepository
+
 let listCategoryUseCase: ListCategoryUseCase
 
 describe('ListCategoryUseCase', () => {

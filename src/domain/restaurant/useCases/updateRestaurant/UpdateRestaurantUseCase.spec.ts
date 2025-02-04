@@ -5,9 +5,11 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
+import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 
-let restaurantRepository: InMemoryRestaurantRepository
-let restaurantHoursRepository: InMemoryRestaurantHoursRepository
+let restaurantRepository: IRestaurantRepository
+let restaurantHoursRepository: IRestaurantHoursRepository
 
 let updateRestaurantUseCase: UpdateRestauranteUseCase
 

@@ -4,8 +4,10 @@ import { DeleteCategoryUseCase } from './DeleteCategoryUseCase'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 import { InMemoryCategoryRepository } from 'test/repositories/products/InMemoryCategoryRepository'
 import { ICreateCategoryDTO } from 'domain/product/dtos/ICreateCategoryDTO'
+import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
 
-let categoryRepository: InMemoryCategoryRepository
+let categoryRepository: ICategoryRepository
+
 let deleteCategoryUseCase: DeleteCategoryUseCase
 
 describe('DeleteCategoryUseCase', () => {

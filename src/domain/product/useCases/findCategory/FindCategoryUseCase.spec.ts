@@ -4,8 +4,10 @@ import { FindCategoryUseCase } from './FindCategoryUseCase'
 import { InMemoryCategoryRepository } from 'test/repositories/products/InMemoryCategoryRepository'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 import { ICreateCategoryDTO } from 'domain/product/dtos/ICreateCategoryDTO'
+import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
 
-let categoryRepository: InMemoryCategoryRepository
+let categoryRepository: ICategoryRepository
+
 let findCategoryUseCase: FindCategoryUseCase
 
 describe('FindCategoryUseCase', () => {

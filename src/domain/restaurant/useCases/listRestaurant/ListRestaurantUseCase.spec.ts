@@ -4,9 +4,12 @@ import { ListRestaurantUseCase } from './ListRestaurantUseCase'
 import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { InMemoryStorageProvider } from 'test/providers/InMemoryStorageProvider'
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 
-let restaurantRepository: InMemoryRestaurantRepository
-let storageProvider: InMemoryStorageProvider
+let restaurantRepository: IRestaurantRepository
+let storageProvider: IStorageProvider
+
 let listRestaurantUseCase: ListRestaurantUseCase
 
 describe('ListRestaurantUseCase', async () => {

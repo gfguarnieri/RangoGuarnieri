@@ -20,11 +20,12 @@
     - [x] O sistema deve permitir a exclusão de categorias de produtos
     - [x] O sistema deve permitir a listagem de categorias de produtos
     - [x] O sistema deve permitir a listagem de categorias de produtos de um restaurante
-    - [ ] O sistema deve permitir o cadastro de produtos
-    - [ ] O sistema deve permitir o cadastro de imagem do produto
+    - [x] O sistema deve permitir o cadastro de produtos
+    - [x] O sistema deve permitir o cadastro de imagem do produto
     - [ ] O sistema deve permitir a alteração de produtos
     - [ ] O sistema deve permitir a alteração da imagem do produto
-    - [ ] O sistema deve permitir a exclusão de produtos
+    - [x] O sistema deve permitir a listagem de produtos
+    - [x] O sistema deve permitir a exclusão de produtos
     - [ ] O sistema deve permitir a listagem de produtos pelo restaurante
     - [ ] O sistema deve permitir a busca de produto pelo Id
     - [ ] O sistema deve permitir adicionar um produto em promoção

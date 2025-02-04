@@ -8,7 +8,7 @@ export interface IProduct {
   categoryId: string
   category?: ICategory
   name: string
-  description: string
+  description?: string
   price: number
   image?: string
   createdAt?: Date

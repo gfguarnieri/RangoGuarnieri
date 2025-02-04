@@ -9,9 +9,12 @@ import {
   IRestaurantHours,
 } from '@domain/restaurant/models/IRestaurantHours'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
+import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
+import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 
-let restaurantRepository: InMemoryRestaurantRepository
-let restaurantHoursRepository: InMemoryRestaurantHoursRepository
+let restaurantRepository: IRestaurantRepository
+let restaurantHoursRepository: IRestaurantHoursRepository
+
 let updateAllRestaurantHoursUseCase: UpdateAllRestaurantHoursUseCase
 
 describe('UpdateAllRestaurantHoursUseCase', () => {
