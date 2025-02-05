@@ -146,10 +146,10 @@ export class ProductRepository implements IProductRepository {
   async update(id: string, data: IProduct): Promise<IProduct | undefined> {
     const query = await RangoDataSource.query(
       `UPDATE product 
-        SET name = $1, description = $2, price = $3, image = $4, updated_at = NOW()
-        WHERE id = $5
+        SET name = $1, description = $2, price = $3, updated_at = NOW()
+        WHERE id = $4
         RETURNING id`,
-      [data.name, data.description, data.price, data.image, id],
+      [data.name, data.description, data.price, id],
     )
 
     const rowsAffected = query[1]

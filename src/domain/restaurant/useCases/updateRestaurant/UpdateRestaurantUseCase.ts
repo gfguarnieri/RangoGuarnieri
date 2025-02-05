@@ -6,6 +6,7 @@ import { IUpdateRestaurantDTO } from '@domain/restaurant/dtos/IUpdateRestaurantD
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 import { validateAllHours } from 'shared/validations/timeValidation'
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
 
 @injectable()
 export class UpdateRestauranteUseCase {
@@ -14,6 +15,8 @@ export class UpdateRestauranteUseCase {
     private restaurantRepository: IRestaurantRepository,
     @inject(DependencyInjectionTokens.RestaurantHoursRepository)
     private restaurantHoursRepository: IRestaurantHoursRepository,
+    @inject(DependencyInjectionTokens.StorageProvider)
+    private storageProvider: IStorageProvider,
   ) {}
 
   async execute(
@@ -33,10 +36,6 @@ export class UpdateRestauranteUseCase {
     await this.restaurantRepository.update(id, input)
 
     const restaurant = await this.restaurantRepository.findById(id)
-
-    if (!restaurant || !restaurant.id) {
-      throw new NotFoundValidationError('Error on update')
-    }
 
     if (input.restaurantHours) {
       const existingHours =
@@ -76,7 +75,7 @@ export class UpdateRestauranteUseCase {
         hoursToCreate.map((hour) =>
           this.restaurantHoursRepository.create({
             ...hour,
-            restaurantId: restaurant.id,
+            restaurantId: restaurant!.id,
           }),
         ),
       )

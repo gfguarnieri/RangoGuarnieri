@@ -1,0 +1,37 @@
+import { IFileUploaded } from 'domain/core/models/IFileUploaded'
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
+import { IProduct, ProductBucket } from 'domain/product/models/IProduct'
+import { IProductRepository } from 'domain/product/repositories/IProductRepository'
+import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
+import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
+import { inject, injectable } from 'tsyringe'
+
+@injectable()
+export class UpdateProductImageUseCase {
+  constructor(
+    @inject(DependencyInjectionTokens.ProductRepository)
+    private productRepository: IProductRepository,
+    @inject(DependencyInjectionTokens.StorageProvider)
+    private storageProvider: IStorageProvider,
+  ) {}
+
+  async execute(
+    id: string,
+    file: IFileUploaded,
+  ): Promise<IProduct | undefined> {
+    const product = await this.productRepository.findById(id)
+
+    if (!product) {
+      throw new NotFoundValidationError('Product not found')
+    }
+    if (product.image) {
+      await this.storageProvider.delete(product.image, ProductBucket)
+    }
+
+    const filename = await this.storageProvider.upload(file, ProductBucket)
+
+    product.image = filename
+
+    return await this.productRepository.update(product.id!, product)
+  }
+}

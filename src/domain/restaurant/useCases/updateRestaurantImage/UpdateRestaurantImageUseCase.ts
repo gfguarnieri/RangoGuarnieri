@@ -49,17 +49,9 @@ export class UpdateRestauranteImageUseCase {
       imageOutput,
     )
 
-    if (
-      !updatedRestaurant ||
-      !updatedRestaurant.id ||
-      !updatedRestaurant.image
-    ) {
-      throw new UseCaseValidationError('Error updating restaurant')
-    }
-
     const response: IResponseImageRestaurant = {
-      id: updatedRestaurant.id,
-      image: updatedRestaurant.image,
+      id: updatedRestaurant.id!,
+      image: updatedRestaurant.image!,
     }
 
     return response
