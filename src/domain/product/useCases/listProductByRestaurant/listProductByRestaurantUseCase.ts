@@ -1,0 +1,30 @@
+import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
+import { IProduct, ProductBucket } from 'domain/product/models/IProduct'
+import { IProductRepository } from 'domain/product/repositories/IProductRepository'
+import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
+import { inject, injectable } from 'tsyringe'
+
+@injectable()
+export class ListProductByRestaurantUseCase {
+  constructor(
+    @inject(DependencyInjectionTokens.ProductRepository)
+    private productRepository: IProductRepository,
+    @inject(DependencyInjectionTokens.StorageProvider)
+    private storageProvider: IStorageProvider,
+  ) {}
+
+  async execute(restaurantId: string): Promise<IProduct[]> {
+    const products =
+      await this.productRepository.listByRestaurantId(restaurantId)
+    return products.map((product) => {
+      if (product.image) {
+        product.image = this.storageProvider.getUrl(
+          product.image,
+          ProductBucket,
+        )
+        product.price = Number(product.price)
+      }
+      return product
+    })
+  }
+}

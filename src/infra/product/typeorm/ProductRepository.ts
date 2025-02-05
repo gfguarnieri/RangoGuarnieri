@@ -102,18 +102,26 @@ export class ProductRepository implements IProductRepository {
   async listByCategoryId(categoryId: string): Promise<IProduct[]> {
     const rows = (await RangoDataSource.query(
       `SELECT 
-        id,
-        restaurant_id as "restaurantId",
-        category_id as "categoryId",
-        name,
-        description,
-        price,
-        image,
-        created_at as "createdAt",
-        updated_at as "updatedAt"
-        FROM product
-        WHERE category_id = $1
-        ORDER BY name
+            p.id,
+            p.restaurant_id as "restaurantId",
+            p.category_id as "categoryId",
+            json_build_object(
+              'id', c.id, 
+              'name', c.name,
+              'createdAt', c.created_at,
+              'updatedAt', c.updated_at,
+              'restaurantId', c.restaurant_id
+            ) as "category",
+            p.name,
+            p.description,
+            p.price,
+            p.image,
+            p.created_at as "createdAt",
+            p.updated_at as "updatedAt"
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.id
+        WHERE p.category_id = $1
+        ORDER BY c.name, p.name
         `,
       [categoryId],
     )) as IProduct[]
@@ -124,18 +132,26 @@ export class ProductRepository implements IProductRepository {
   async listByRestaurantId(restaurantId: string): Promise<IProduct[]> {
     const rows = (await RangoDataSource.query(
       `SELECT 
-        id,
-        restaurant_id as "restaurantId",
-        category_id as "categoryId",
-        name,
-        description,
-        price,
-        image,
-        created_at as "createdAt",
-        updated_at as "updatedAt"
-        FROM product
-        WHERE restaurant_id = $1
-        ORDER BY name
+            p.id,
+            p.restaurant_id as "restaurantId",
+            p.category_id as "categoryId",
+            json_build_object(
+              'id', c.id, 
+              'name', c.name,
+              'createdAt', c.created_at,
+              'updatedAt', c.updated_at,
+              'restaurantId', c.restaurant_id
+            ) as "category",
+            p.name,
+            p.description,
+            p.price,
+            p.image,
+            p.created_at as "createdAt",
+            p.updated_at as "updatedAt"
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.id
+        WHERE p.restaurant_id = $1
+        ORDER BY c.name, p.name
         `,
       [restaurantId],
     )) as IProduct[]
