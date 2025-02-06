@@ -1,0 +1,66 @@
+erDiagram
+    RESTAURANT {
+        UUID id PK "DEFAULT gen_random_uuid()"
+        VARCHAR(100) name "NOT NULL"
+        VARCHAR(255) image "NULL"
+        VARCHAR(150) address "NOT NULL"
+        VARCHAR(50) neighborhood "NOT NULL"
+        VARCHAR(20) number "NOT NULL"
+        VARCHAR(50) city "NOT NULL"
+        VARCHAR(2) state "NOT NULL"
+        VARCHAR(8) postalCode "NOT NULL"
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+        TIMESTAMP updated_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+
+    RESTAURANT_HOURS {
+        UUID id PK "DEFAULT gen_random_uuid()"
+        UUID restaurant_id FK "NOT NULL"
+        VARCHAR(10) day_of_week "NOT NULL"
+        CHAR(5) opening_time "NOT NULL"
+        CHAR(5) closing_time "NOT NULL"
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+
+    CATEGORY {
+        UUID id PK "DEFAULT gen_random_uuid()"
+        UUID restaurant_id FK "NOT NULL"
+        VARCHAR(100) name "NOT NULL"
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+        TIMESTAMP updated_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+
+    PRODUCT {
+        UUID id PK "DEFAULT gen_random_uuid()"
+        UUID restaurant_id FK "NOT NULL"
+        UUID category_id FK "NOT NULL"
+        VARCHAR(100) name "NOT NULL"
+        TEXT description "NULL"
+        NUMERIC price "NOT NULL"
+        VARCHAR(255) image "NULL"
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+        TIMESTAMP updated_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+
+    PRODUCT_SALE {
+        UUID id PK "DEFAULT gen_random_uuid()"
+        UUID product_id FK "NOT NULL"
+        NUMERIC promotion_price "NOT NULL"
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+
+    PRODUCT_SALE_DAYS {
+        UUID id PK "DEFAULT gen_random_uuid()"
+        UUID product_sale_id FK "NOT NULL"
+        VARCHAR(10) day_of_week "NOT NULL"
+        CHAR(5) opening_time "NOT NULL"
+        CHAR(5) closing_time "NOT NULL"
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+
+    RESTAURANT ||--o{ RESTAURANT_HOURS : has
+    RESTAURANT ||--o{ CATEGORY : has
+    RESTAURANT ||--o{ PRODUCT : has
+    CATEGORY ||--o{ PRODUCT : contains
+    PRODUCT ||--o{ PRODUCT_SALE : has
+    PRODUCT_SALE ||--o{ PRODUCT_SALE_DAYS : includes

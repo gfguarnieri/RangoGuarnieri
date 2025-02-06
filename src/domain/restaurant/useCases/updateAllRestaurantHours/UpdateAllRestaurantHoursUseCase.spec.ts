@@ -4,13 +4,11 @@ import { UpdateAllRestaurantHoursUseCase } from './UpdateAllRestaurantHoursUseCa
 import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
 import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMemoryRestaurantRepository'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
-import {
-  DayOfWeek,
-  IRestaurantHours,
-} from '@domain/restaurant/models/IRestaurantHours'
+import { IRestaurantHours } from '@domain/restaurant/models/IRestaurantHours'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
+import { DayOfWeek } from 'domain/core/models/IHours'
 
 let restaurantRepository: IRestaurantRepository
 let restaurantHoursRepository: IRestaurantHoursRepository

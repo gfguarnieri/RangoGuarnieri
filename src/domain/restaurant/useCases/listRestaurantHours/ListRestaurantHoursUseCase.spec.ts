@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { ListRestaurantHoursUseCase } from './ListRestaurantHoursUseCase'
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
-import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
+import { DayOfWeek } from 'domain/core/models/IHours'
 
 let restaurantHoursRepository: IRestaurantHoursRepository
 

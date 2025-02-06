@@ -4,9 +4,9 @@ import { InMemoryRestaurantRepository } from 'test/repositories/restaurant/InMem
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ICreateRestaurantDTO } from '@domain/restaurant/dtos/ICreateRestaurantDTO'
 import { InMemoryRestaurantHoursRepository } from 'test/repositories/restaurant/InMemoryRestaurantHoursRepository'
-import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
+import { DayOfWeek } from 'domain/core/models/IHours'
 
 let restaurantRepository: IRestaurantRepository
 let restaurantHoursRepository: IRestaurantHoursRepository

@@ -1,6 +1,6 @@
 # Rango Food 
 
-:warning: **Readme em construção** :construction:
+Rango Food é uma API RESTful para cadastro de restaurantes e produtos. O sistema foi desenvolvido em NodeJS e utiliza o banco de dados PostgreSQL. A API contempla cadastro de restaurantes, produtos, categorias de produtos, horário de funcionamento dos restaurantes e promoções.
 
 ### :memo: Funcionalidades
 - [x] Restaurantes
@@ -26,9 +26,10 @@
     - [x] O sistema deve permitir a alteração da imagem do produto
     - [x] O sistema deve permitir a listagem de produtos
     - [x] O sistema deve permitir a exclusão de produtos
-    - [ ] O sistema deve permitir a listagem de produtos pelo restaurante
-    - [ ] O sistema deve permitir a busca de produto pelo Id
+    - [x] O sistema deve permitir a listagem de produtos pelo restaurante
+    - [x] O sistema deve permitir a busca de produto pelo Id
     - [ ] O sistema deve permitir adicionar um produto em promoção
+    - [ ] O sistema deve permitir remover um produto da promoção
     - [ ] O sistema deve permitir remover um produto da promoção
 
 ### RFN - Requisitos não Funcionais 
@@ -41,10 +42,21 @@
 - Não utilizar query builder 
 - Utilizar raw query para as consultas no banco de dados
 
+### Regras de Negócio
+- O intervalo de horário de funcionamento do restaurante deve ter no mínimo 15 minutos;
+- O intervalo de promoção do produto deve ter no mínimo 15 minutos;
+- Não deve existir dois registros de horário de funcionamento do restaurante no mesmo intervalo de tempo no mesmo dia;
+- Não deve existir dois registros de promoção do produto no mesmo intervalo de tempo no mesmo dia;
+
 ### Melhorias Futuras 
-- [ ] Criar rotas de pesquisa (/search) para restaurantes e produtos com filtros e paginação
-- [ ] Criar novo provider de Armazenamento de arquivos na nuvem (AWS S3)
-- [ ] As validações simples de dados já estão traduzidas (Zod i18n), mas as validações de caso de uso estão em inglês. Criar resources para tradução das mensagens de erro.
+- Criar rotas de pesquisa (/search) para restaurantes e produtos com filtros e paginação
+- Criar novo provider de Armazenamento de arquivos na nuvem (AWS S3)
+- As validações simples de dados já estão traduzidas (Zod i18n), mas as validações de caso de uso estão em inglês. Criar resources para tradução das mensagens de erro.
+- Criar um provider de cache para armazenar os dados de restaurantes e produtos
+
+### Diagrama de Entidade e Relacionamento
+
+![Diagrama de Entidade e Relacionamento](./docs/erDiagram.svg)
 
 ### Configuração do ambiente
 Para configurar o ambiente é necessário ter:

@@ -1,7 +1,7 @@
+import { IHours } from 'domain/core/models/IHours'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
-import { IRestaurantHours } from 'domain/restaurant/models/IRestaurantHours'
 
-export function validateAllHours(hours: IRestaurantHours[]) {
+export function validateAllHours(hours: IHours[]) {
   hours.forEach((hour, index) => {
     const openingParts = hour.openingTime.split(':')
     checkLimitHourMinute(openingParts[0], openingParts[1])
@@ -26,10 +26,7 @@ function checkLimitHourMinute(hour: string, minute: string) {
   }
 }
 
-function checkForOverlappingHours(
-  hour1: IRestaurantHours,
-  hour2: IRestaurantHours,
-) {
+function checkForOverlappingHours(hour1: IHours, hour2: IHours) {
   const openingTime1 = new Date(`2025-01-01T${hour1.openingTime}:00.000Z`)
   const closingTime1 = new Date(`2025-01-01T${hour1.closingTime}:00.000Z`)
   const openingTime2 = new Date(`2025-01-01T${hour2.openingTime}:00.000Z`)
@@ -45,7 +42,7 @@ function checkForOverlappingHours(
   }
 }
 
-export function validateHour(hour: IRestaurantHours) {
+export function validateHour(hour: IHours) {
   const openingTime = new Date(`2025-01-01T${hour.openingTime}:00.000Z`)
   const closingTime = new Date(`2025-01-01T${hour.closingTime}:00.000Z`)
   validationOpeningAndClosingTime(hour.openingTime, hour.closingTime)

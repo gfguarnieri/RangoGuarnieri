@@ -1,18 +1,5 @@
-export enum DayOfWeek {
-  SUNDAY = 'SUNDAY',
-  MONDAY = 'MONDAY',
-  TUESDAY = 'TUESDAY',
-  WEDNESDAY = 'WEDNESDAY',
-  THURSDAY = 'THURSDAY',
-  FRIDAY = 'FRIDAY',
-  SATURDAY = 'SATURDAY',
-}
+import { IHours } from 'domain/core/models/IHours'
 
-export interface IRestaurantHours {
-  id?: string
+export interface IRestaurantHours extends IHours {
   restaurantId?: string
-  dayOfWeek: DayOfWeek
-  openingTime: string
-  closingTime: string
-  createdAt?: Date
 }

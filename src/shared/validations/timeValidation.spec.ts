@@ -6,7 +6,7 @@ import {
   validationOpeningAndClosingTime,
 } from './timeValidation'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
-import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
+import { DayOfWeek } from 'domain/core/models/IHours'
 
 describe('timeValidation', async () => {
   it('should validate correctly when opening and closing times are valid', () => {
