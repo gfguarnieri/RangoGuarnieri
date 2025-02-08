@@ -1,6 +1,27 @@
 import { IHours } from 'domain/core/models/IHours'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 
+export function getCurrentDayOfWeekAndHour() {
+  const date = new Date()
+  const days = [
+    'SUNDAY',
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY',
+  ]
+
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+
+  return {
+    dayOfWeek: days[date.getDay()],
+    hour: `${hours}:${minutes}`,
+  }
+}
+
 export function validateAllHours(hours: IHours[]) {
   hours.forEach((hour, index) => {
     const openingParts = hour.openingTime.split(':')
