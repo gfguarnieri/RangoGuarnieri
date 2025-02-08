@@ -3,6 +3,7 @@ import { IUpdateCategoryDTO } from '../dtos/IUpdateCategoryDTO'
 import { Category } from '../entities/Category'
 
 export interface ICategoryRepository {
+  exists(id: string): Promise<boolean>
   create(data: ICreateCategoryDTO): Promise<Category>
   list(): Promise<Category[]>
   findById(id: string): Promise<Category | undefined>

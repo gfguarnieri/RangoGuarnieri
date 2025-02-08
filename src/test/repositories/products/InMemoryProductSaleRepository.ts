@@ -6,6 +6,12 @@ import { IProductSaleRepository } from 'domain/product/repositories/IProductSale
 export class InMemoryProductSaleRepository implements IProductSaleRepository {
   private productSales: ProductSale[] = []
 
+  async exists(productId: string, productSaleId: string): Promise<boolean> {
+    return this.productSales.some(
+      (sale) => sale.productId === productId && sale.id === productSaleId,
+    )
+  }
+
   async create(data: ICreateProductSaleDTO): Promise<ProductSale> {
     const productSale = new ProductSale(data)
     this.productSales.push(productSale)

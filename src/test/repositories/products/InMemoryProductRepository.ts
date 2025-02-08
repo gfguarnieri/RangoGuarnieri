@@ -5,6 +5,10 @@ import { IProductRepository } from 'domain/product/repositories/IProductReposito
 export class InMemoryProductRepository implements IProductRepository {
   private products: Product[] = []
 
+  async exists(id: string): Promise<boolean> {
+    return this.products.some((product) => product.id === id)
+  }
+
   async create(data: ICreateProductDTO): Promise<Product> {
     const product = new Product(data)
     this.products.push(product)

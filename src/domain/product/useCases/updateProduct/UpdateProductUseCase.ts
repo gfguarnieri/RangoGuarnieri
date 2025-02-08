@@ -27,15 +27,13 @@ export class UpdateProductUseCase {
   ) {}
 
   async execute(id: string, data: IUpdateProductDTO): Promise<Product> {
-    const category = await this.categoryRespository.findById(data.categoryId)
+    const category = await this.categoryRespository.exists(data.categoryId)
 
     if (!category) {
       throw new NotFoundValidationError('Category not found')
     }
 
-    const restaurant = await this.restaurantRepository.findById(
-      data.restaurantId,
-    )
+    const restaurant = await this.restaurantRepository.exists(data.restaurantId)
 
     if (!restaurant) {
       throw new NotFoundValidationError('Restaurant not found')

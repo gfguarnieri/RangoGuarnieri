@@ -7,6 +7,14 @@ import { RangoDataSource } from 'shared/infra/typeorm/connection'
 import { RepositoryError } from 'shared/errors/RepositoryError'
 
 export class RestaurantRepository implements IRestaurantRepository {
+  async exists(id: string): Promise<boolean> {
+    const rows = await RangoDataSource.query(
+      `SELECT 1 FROM restaurant WHERE id = $1 LIMIT 1`,
+      [id],
+    )
+    return rows.length > 0
+  }
+
   async create(restaurant: ICreateRestaurantDTO): Promise<Restaurant> {
     const query = await RangoDataSource.query(
       `INSERT INTO restaurant 

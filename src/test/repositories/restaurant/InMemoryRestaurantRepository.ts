@@ -5,6 +5,10 @@ import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaura
 export class InMemoryRestaurantRepository implements IRestaurantRepository {
   private restaurants: Restaurant[] = []
 
+  async exists(id: string): Promise<boolean> {
+    return this.restaurants.some((restaurant) => restaurant.id === id)
+  }
+
   async create({
     name,
     image,

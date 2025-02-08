@@ -7,6 +7,14 @@ import { ProductSale } from 'domain/product/entities/ProductSale'
 import { IUpdateProductSaleDTO } from 'domain/product/dtos/IUpdateProductSaleDTO'
 
 export class ProductSaleRepository implements IProductSaleRepository {
+  async exists(productId: string, productSaleId: string): Promise<boolean> {
+    const rows = await RangoDataSource.query(
+      `SELECT 1 FROM product_sale WHERE product_id = $1 AND id = $2 LIMIT 1`,
+      [productId, productSaleId],
+    )
+    return rows.length > 0
+  }
+
   async update(
     id: string,
     sale: IUpdateProductSaleDTO,

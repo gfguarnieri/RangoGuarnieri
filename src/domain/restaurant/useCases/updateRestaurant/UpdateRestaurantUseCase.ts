@@ -24,9 +24,9 @@ export class UpdateRestauranteUseCase {
       validateAllHours(input.restaurantHours)
     }
 
-    const restaurantExists = await this.restaurantRepository.findById(id)
+    const restaurantExists = await this.restaurantRepository.exists(id)
 
-    if (!restaurantExists || !restaurantExists.id) {
+    if (!restaurantExists) {
       throw new NotFoundValidationError('Restaurant not found')
     }
 
@@ -34,9 +34,7 @@ export class UpdateRestauranteUseCase {
 
     if (input.restaurantHours) {
       const existingHours =
-        await this.restaurantHoursRepository.listByRestaurantId(
-          restaurantExists.id,
-        )
+        await this.restaurantHoursRepository.listByRestaurantId(id)
       const newHours = input.restaurantHours ?? []
 
       const hoursToDelete = existingHours.filter(

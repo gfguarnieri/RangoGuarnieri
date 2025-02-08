@@ -6,6 +6,10 @@ import { ICategoryRepository } from 'domain/product/repositories/ICategoryReposi
 export class InMemoryCategoryRepository implements ICategoryRepository {
   private categories: Category[] = []
 
+  async exists(id: string): Promise<boolean> {
+    return this.categories.some((category) => category.id === id)
+  }
+
   async create(data: ICreateCategoryDTO): Promise<Category> {
     const category: Category = new Category(data)
     this.categories.push(category)

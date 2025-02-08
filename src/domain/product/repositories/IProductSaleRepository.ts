@@ -3,6 +3,7 @@ import { IUpdateProductSaleDTO } from '../dtos/IUpdateProductSaleDTO'
 import { ProductSale } from '../entities/ProductSale'
 
 export interface IProductSaleRepository {
+  exists(productId: string, productSaleId: string): Promise<boolean>
   create(sale: ICreateProductSaleDTO): Promise<ProductSale>
   update(
     id: string,

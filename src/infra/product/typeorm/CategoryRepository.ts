@@ -7,6 +7,14 @@ import { RepositoryError } from 'shared/errors/RepositoryError'
 import { Category } from 'domain/product/entities/Category'
 
 export class CategoryRepository implements ICategoryRepository {
+  async exists(id: string): Promise<boolean> {
+    const rows = await RangoDataSource.query(
+      `SELECT 1 FROM category WHERE id = $1 LIMIT 1`,
+      [id],
+    )
+    return rows.length > 0
+  }
+
   async create(category: ICreateCategoryDTO): Promise<Category> {
     const query = await RangoDataSource.query(
       `INSERT INTO category 

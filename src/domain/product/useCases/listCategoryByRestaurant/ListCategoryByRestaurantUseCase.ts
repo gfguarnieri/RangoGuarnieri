@@ -15,7 +15,7 @@ export class ListCategoryByRestaurantUseCase {
   ) {}
 
   async execute(restaurantId: string): Promise<Category[]> {
-    const restaurant = await this.restaurantRepository.findById(restaurantId)
+    const restaurant = await this.restaurantRepository.exists(restaurantId)
 
     if (!restaurant) {
       throw new NotFoundValidationError('Restaurant not found')

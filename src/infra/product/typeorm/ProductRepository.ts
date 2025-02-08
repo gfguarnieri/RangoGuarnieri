@@ -6,6 +6,14 @@ import { RepositoryError } from 'shared/errors/RepositoryError'
 import { Product } from 'domain/product/entities/Product'
 
 export class ProductRepository implements IProductRepository {
+  async exists(id: string): Promise<boolean> {
+    const rows = await RangoDataSource.query(
+      `SELECT 1 FROM product WHERE id = $1 LIMIT 1`,
+      [id],
+    )
+    return rows.length > 0
+  }
+
   async create(product: ICreateProductDTO): Promise<Product> {
     const query = await RangoDataSource.query(
       `INSERT INTO product 

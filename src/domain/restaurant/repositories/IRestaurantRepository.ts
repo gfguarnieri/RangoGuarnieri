@@ -3,6 +3,7 @@ import { IUpdateRestaurantDTO } from '../dtos/IUpdateRestaurantDTO'
 import { Restaurant } from '../entities/Restaurant'
 
 export interface IRestaurantRepository {
+  exists(id: string): Promise<boolean>
   create(restaurant: ICreateRestaurantDTO): Promise<Restaurant>
   update(
     id: string,

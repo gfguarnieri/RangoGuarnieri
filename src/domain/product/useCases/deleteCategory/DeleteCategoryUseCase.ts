@@ -11,7 +11,7 @@ export class DeleteCategoryUseCase {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const category = await this.categoryRepository.findById(id)
+    const category = await this.categoryRepository.exists(id)
 
     if (!category) {
       throw new NotFoundValidationError('Category not found')

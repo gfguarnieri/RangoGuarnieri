@@ -32,15 +32,13 @@ export class CreateProductUseCase {
       throw new UseCaseValidationError('Image is required')
     }
 
-    const restaurant = await this.restaurantRepository.findById(
-      data.restaurantId,
-    )
+    const restaurant = await this.restaurantRepository.exists(data.restaurantId)
 
     if (!restaurant) {
       throw new NotFoundValidationError('Restaurant not found')
     }
 
-    const category = await this.categoryRepository.findById(data.categoryId)
+    const category = await this.categoryRepository.exists(data.categoryId)
 
     if (!category) {
       throw new NotFoundValidationError('Category not found')

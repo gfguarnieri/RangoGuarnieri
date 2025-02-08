@@ -16,7 +16,7 @@ export class UpdateCategoryUseCase {
   ) {}
 
   async execute(id: string, input: IUpdateCategoryDTO): Promise<Category> {
-    const restaurant = await this.restaurantRepository.findById(
+    const restaurant = await this.restaurantRepository.exists(
       input.restaurantId,
     )
 
@@ -26,10 +26,6 @@ export class UpdateCategoryUseCase {
 
     const category = await this.categoryRepository.update(id, input)
 
-    if (!category) {
-      throw new NotFoundValidationError('Category not found')
-    }
-
-    return category
+    return category!
   }
 }

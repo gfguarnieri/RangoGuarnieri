@@ -14,13 +14,13 @@ export class DeleteProductSaleUseCase {
   ) {}
 
   async execute(productId: string, id: string): Promise<void> {
-    const product = await this.productRepository.findById(productId)
+    const product = await this.productRepository.exists(productId)
 
     if (!product) {
       throw new NotFoundValidationError('Product not found')
     }
 
-    const productSale = await this.productSaleRepository.findById(id)
+    const productSale = await this.productSaleRepository.exists(productId, id)
 
     if (!productSale) {
       throw new NotFoundValidationError('Product Sale not found')
