@@ -61,7 +61,7 @@ export class InMemoryRestaurantRepository implements IRestaurantRepository {
     return this.restaurants[itemIndex]
   }
 
-  async findById(id: string) {
+  async findById(id: string): Promise<Restaurant | undefined> {
     return this.restaurants.find((restaurant) => restaurant.id === id)
   }
 

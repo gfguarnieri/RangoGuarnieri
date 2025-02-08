@@ -2,8 +2,8 @@ import { CreateRestauranteUseCase } from '@domain/restaurant/useCases/createRest
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'
-import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 import { z } from '@zod/i18n'
+import { DayOfWeek } from 'domain/core/models/IHours'
 
 const schema = z.object({
   name: z.string().max(100).nonempty(),

@@ -6,7 +6,7 @@ export class Product {
   restaurantId: string
   categoryId: string
   name: string
-  description: string
+  description?: string
   price: number
   image?: string
   createdAt?: Date

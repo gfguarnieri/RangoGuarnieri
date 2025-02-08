@@ -4,4 +4,6 @@ export enum DependencyInjectionTokens {
   CategoryRepository = 'CategoryRepository',
   StorageProvider = 'StorageProvider',
   ProductRepository = 'ProductRepository',
+  ProductSaleRepository = 'ProductSaleRepository',
+  ProductSaleDayRepository = 'ProductSaleDayRepository',
 }

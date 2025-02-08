@@ -1,5 +1,4 @@
 import { ICreateProductDTO } from 'domain/product/dtos/ICreateProductDTO'
-import { IProduct } from 'domain/product/models/IProduct'
 import { IProductRepository } from 'domain/product/repositories/IProductRepository'
 import { RangoDataSource } from 'shared/infra/typeorm/connection'
 import { z } from '@zod/i18n'
@@ -7,7 +6,7 @@ import { RepositoryError } from 'shared/errors/RepositoryError'
 import { Product } from 'domain/product/entities/Product'
 
 export class ProductRepository implements IProductRepository {
-  async create(product: ICreateProductDTO): Promise<IProduct> {
+  async create(product: ICreateProductDTO): Promise<Product> {
     const query = await RangoDataSource.query(
       `INSERT INTO product 
               (restaurant_id, category_id, name, description, price, image) 
@@ -40,7 +39,7 @@ export class ProductRepository implements IProductRepository {
     return productCreated
   }
 
-  async list(): Promise<IProduct[]> {
+  async list(): Promise<Product[]> {
     const products = (await RangoDataSource.query(
       `SELECT 
             p.id,
@@ -63,12 +62,12 @@ export class ProductRepository implements IProductRepository {
         LEFT JOIN category c ON p.category_id = c.id
         ORDER BY c.name, p.name
         `,
-    )) as IProduct[]
+    )) as Product[]
 
     return products
   }
 
-  async findById(id: string): Promise<IProduct | undefined> {
+  async findById(id: string): Promise<Product | undefined> {
     const rows = await RangoDataSource.query(
       `SELECT 
             p.id,
@@ -96,10 +95,10 @@ export class ProductRepository implements IProductRepository {
     if (rows.length === 0) {
       return undefined
     }
-    return rows[0] as IProduct
+    return rows[0] as Product
   }
 
-  async listByCategoryId(categoryId: string): Promise<IProduct[]> {
+  async listByCategoryId(categoryId: string): Promise<Product[]> {
     const rows = (await RangoDataSource.query(
       `SELECT 
             p.id,
@@ -124,12 +123,12 @@ export class ProductRepository implements IProductRepository {
         ORDER BY c.name, p.name
         `,
       [categoryId],
-    )) as IProduct[]
+    )) as Product[]
 
     return rows
   }
 
-  async listByRestaurantId(restaurantId: string): Promise<IProduct[]> {
+  async listByRestaurantId(restaurantId: string): Promise<Product[]> {
     const rows = (await RangoDataSource.query(
       `SELECT 
             p.id,
@@ -154,12 +153,12 @@ export class ProductRepository implements IProductRepository {
         ORDER BY c.name, p.name
         `,
       [restaurantId],
-    )) as IProduct[]
+    )) as Product[]
 
     return rows
   }
 
-  async update(id: string, data: IProduct): Promise<IProduct | undefined> {
+  async update(id: string, data: Product): Promise<Product | undefined> {
     const query = await RangoDataSource.query(
       `UPDATE product 
         SET name = $1, description = $2, price = $3, updated_at = NOW()

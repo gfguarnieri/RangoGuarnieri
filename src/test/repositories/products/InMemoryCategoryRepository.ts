@@ -1,27 +1,26 @@
 import { ICreateCategoryDTO } from 'domain/product/dtos/ICreateCategoryDTO'
 import { IUpdateCategoryDTO } from 'domain/product/dtos/IUpdateCategoryDTO'
 import { Category } from 'domain/product/entities/Category'
-import { ICategory } from 'domain/product/models/ICategory'
 import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
-  private categories: ICategory[] = []
+  private categories: Category[] = []
 
-  async create(data: ICreateCategoryDTO): Promise<ICategory> {
-    const category: ICategory = new Category(data)
+  async create(data: ICreateCategoryDTO): Promise<Category> {
+    const category: Category = new Category(data)
     this.categories.push(category)
     return category
   }
 
-  async list(): Promise<ICategory[]> {
+  async list(): Promise<Category[]> {
     return this.categories
   }
 
-  async findById(id: string): Promise<ICategory | undefined> {
+  async findById(id: string): Promise<Category | undefined> {
     return this.categories.find((category) => category.id === id)
   }
 
-  async listByRestaurantId(restaurantId: string): Promise<ICategory[]> {
+  async listByRestaurantId(restaurantId: string): Promise<Category[]> {
     return this.categories.filter(
       (category) => category.restaurantId === restaurantId,
     )
@@ -30,7 +29,7 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
   async update(
     id: string,
     data: IUpdateCategoryDTO,
-  ): Promise<ICategory | undefined> {
+  ): Promise<Category | undefined> {
     const categoryIndex = this.categories.findIndex(
       (category) => category.id === id,
     )

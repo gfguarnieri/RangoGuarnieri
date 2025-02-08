@@ -1,6 +1,7 @@
 import { IFileUploaded } from 'domain/core/models/IFileUploaded'
 import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
-import { IProduct, ProductBucket } from 'domain/product/models/IProduct'
+import { Product } from 'domain/product/entities/Product'
+import { ProductBucket } from 'domain/product/models/IProduct'
 import { IProductRepository } from 'domain/product/repositories/IProductRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
@@ -15,10 +16,7 @@ export class UpdateProductImageUseCase {
     private storageProvider: IStorageProvider,
   ) {}
 
-  async execute(
-    id: string,
-    file: IFileUploaded,
-  ): Promise<IProduct | undefined> {
+  async execute(id: string, file: IFileUploaded): Promise<Product | undefined> {
     const product = await this.productRepository.findById(id)
 
     if (!product) {

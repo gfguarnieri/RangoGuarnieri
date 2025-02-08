@@ -1,6 +1,6 @@
-import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 import { UpdateAllRestaurantHoursUseCase } from '@domain/restaurant/useCases/updateAllRestaurantHours/UpdateAllRestaurantHoursUseCase'
 import { z } from '@zod/i18n'
+import { DayOfWeek } from 'domain/core/models/IHours'
 import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { container } from 'tsyringe'

@@ -6,8 +6,6 @@ import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionT
 import { validateAllHours } from 'shared/validations/timeValidation'
 import { inject, injectable } from 'tsyringe'
 
-interface IRequest extends ICreateRestaurantDTO {}
-
 @injectable()
 export class CreateRestauranteUseCase {
   constructor(
@@ -17,7 +15,7 @@ export class CreateRestauranteUseCase {
     private restaurantHoursRepository: IRestaurantHoursRepository,
   ) {}
 
-  async execute(input: IRequest): Promise<Restaurant> {
+  async execute(input: ICreateRestaurantDTO): Promise<Restaurant> {
     const hours = input.restaurantHours ?? []
 
     validateAllHours(hours)

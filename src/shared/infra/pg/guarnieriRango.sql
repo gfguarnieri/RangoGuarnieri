@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS restaurant_hours(
     opening_time CHAR(5) NOT NULL,
     closing_time CHAR(5) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS category(
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS category(
     name VARCHAR(100) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS product(
@@ -41,24 +41,26 @@ CREATE TABLE IF NOT EXISTS product(
     category_id UUID NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id),
-    FOREIGN KEY (category_id) REFERENCES category(id)
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS product_sale(
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     product_id UUID NOT NULL,
+    description TEXT NULL,
     promotion_price NUMERIC(10, 2) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES product(id)
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS product_sale_days(
+CREATE TABLE IF NOT EXISTS product_sale_day(
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     product_sale_id UUID NOT NULL,
     day_of_week VARCHAR(10) NOT NULL,
     opening_time CHAR(5) NOT NULL,
     closing_time CHAR(5) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_sale_id) REFERENCES product_sale(id)
+    FOREIGN KEY (product_sale_id) REFERENCES product_sale(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

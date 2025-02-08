@@ -46,6 +46,8 @@ erDiagram
         UUID id PK "DEFAULT gen_random_uuid()"
         UUID product_id FK "NOT NULL"
         NUMERIC promotion_price "NOT NULL"
+        TEXT description "NOT NULL"
+        BOOLEAN is_active "NOT NULL" "DEFAULT TRUE",
         TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
     }
 

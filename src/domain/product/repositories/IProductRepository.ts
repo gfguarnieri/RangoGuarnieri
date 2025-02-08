@@ -1,12 +1,12 @@
 import { ICreateProductDTO } from '../dtos/ICreateProductDTO'
-import { IProduct } from '../models/IProduct'
+import { Product } from '../entities/Product'
 
 export interface IProductRepository {
-  create(data: ICreateProductDTO): Promise<IProduct>
-  list(): Promise<IProduct[]>
-  findById(id: string): Promise<IProduct | undefined>
-  listByCategoryId(categoryId: string): Promise<IProduct[]>
-  listByRestaurantId(restaurantId: string): Promise<IProduct[]>
-  update(id: string, data: IProduct): Promise<IProduct | undefined>
+  create(data: ICreateProductDTO): Promise<Product>
+  list(): Promise<Product[]>
+  findById(id: string): Promise<Product | undefined>
+  listByCategoryId(categoryId: string): Promise<Product[]>
+  listByRestaurantId(restaurantId: string): Promise<Product[]>
+  update(id: string, data: Product): Promise<Product | undefined>
   delete(id: string): Promise<void>
 }

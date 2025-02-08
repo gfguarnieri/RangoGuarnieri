@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto'
-import { DayOfWeek, IRestaurantHours } from '../models/IRestaurantHours'
+import { IRestaurantHours } from '../models/IRestaurantHours'
+import { DayOfWeek } from 'domain/core/models/IHours'
 
 export class RestaurantHours {
   id?: string

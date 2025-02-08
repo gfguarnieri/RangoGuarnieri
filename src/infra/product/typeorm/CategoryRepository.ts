@@ -1,6 +1,5 @@
 import { ICreateCategoryDTO } from 'domain/product/dtos/ICreateCategoryDTO'
 import { IUpdateCategoryDTO } from 'domain/product/dtos/IUpdateCategoryDTO'
-import { ICategory } from 'domain/product/models/ICategory'
 import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
 import { RangoDataSource } from 'shared/infra/typeorm/connection'
 import { z } from '@zod/i18n'
@@ -8,7 +7,7 @@ import { RepositoryError } from 'shared/errors/RepositoryError'
 import { Category } from 'domain/product/entities/Category'
 
 export class CategoryRepository implements ICategoryRepository {
-  async create(category: ICreateCategoryDTO): Promise<ICategory> {
+  async create(category: ICreateCategoryDTO): Promise<Category> {
     const query = await RangoDataSource.query(
       `INSERT INTO category 
               (name, restaurant_id) 
@@ -34,7 +33,7 @@ export class CategoryRepository implements ICategoryRepository {
     return restaurantCreated
   }
 
-  async list(): Promise<ICategory[]> {
+  async list(): Promise<Category[]> {
     const categories = (await RangoDataSource.query(`SELECT 
         id,
         name,
@@ -43,12 +42,12 @@ export class CategoryRepository implements ICategoryRepository {
         updated_at as "updatedAt"
         FROM category
         ORDER BY name
-        `)) as ICategory[]
+        `)) as Category[]
 
     return categories
   }
 
-  async findById(id: string): Promise<ICategory | undefined> {
+  async findById(id: string): Promise<Category | undefined> {
     const rows = await RangoDataSource.query(
       `SELECT 
         id,
@@ -64,10 +63,10 @@ export class CategoryRepository implements ICategoryRepository {
     if (rows.length === 0) {
       return undefined
     }
-    return rows[0] as ICategory
+    return rows[0] as Category
   }
 
-  async listByRestaurantId(restaurantId: string): Promise<ICategory[]> {
+  async listByRestaurantId(restaurantId: string): Promise<Category[]> {
     const rows = (await RangoDataSource.query(
       `SELECT 
         id,
@@ -80,7 +79,7 @@ export class CategoryRepository implements ICategoryRepository {
         ORDER BY name
         `,
       [restaurantId],
-    )) as ICategory[]
+    )) as Category[]
 
     return rows
   }
@@ -88,7 +87,7 @@ export class CategoryRepository implements ICategoryRepository {
   async update(
     id: string,
     data: IUpdateCategoryDTO,
-  ): Promise<ICategory | undefined> {
+  ): Promise<Category | undefined> {
     const query = await RangoDataSource.query(
       `UPDATE category 
         SET name = $1, updated_at = NOW()

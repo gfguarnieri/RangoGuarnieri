@@ -2,7 +2,8 @@ import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaura
 import { IFileUploaded } from 'domain/core/models/IFileUploaded'
 import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
 import { ICreateProductDTO } from 'domain/product/dtos/ICreateProductDTO'
-import { IProduct, ProductBucket } from 'domain/product/models/IProduct'
+import { Product } from 'domain/product/entities/Product'
+import { ProductBucket } from 'domain/product/models/IProduct'
 import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
 import { IProductRepository } from 'domain/product/repositories/IProductRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
@@ -26,7 +27,7 @@ export class CreateProductUseCase {
   async execute(
     file: IFileUploaded,
     data: ICreateProductDTO,
-  ): Promise<IProduct> {
+  ): Promise<Product> {
     if (!file || !file.filebuffer || !file.filemime) {
       throw new UseCaseValidationError('Image is required')
     }

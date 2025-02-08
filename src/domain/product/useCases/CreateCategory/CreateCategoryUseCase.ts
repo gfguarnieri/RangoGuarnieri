@@ -1,6 +1,6 @@
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
 import { ICreateCategoryDTO } from 'domain/product/dtos/ICreateCategoryDTO'
-import { ICategory } from 'domain/product/models/ICategory'
+import { Category } from 'domain/product/entities/Category'
 import { ICategoryRepository } from 'domain/product/repositories/ICategoryRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
 import { NotFoundValidationError } from 'shared/errors/NotFoundValidationError'
@@ -15,7 +15,7 @@ export class CreateCategoryUseCase {
     private restaurantRepository: IRestaurantRepository,
   ) {}
 
-  async execute(data: ICreateCategoryDTO): Promise<ICategory> {
+  async execute(data: ICreateCategoryDTO): Promise<Category> {
     const restaurant = await this.restaurantRepository.findById(
       data.restaurantId,
     )

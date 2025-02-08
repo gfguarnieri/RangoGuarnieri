@@ -32,7 +32,7 @@ Rango Food é uma API RESTful para cadastro de restaurantes e produtos. O sistem
     - [ ] O sistema deve permitir remover um produto da promoção
     - [ ] O sistema deve permitir remover um produto da promoção
 
-### RFN - Requisitos não Funcionais 
+### RNF - Requisitos não Funcionais 
 - O sistema deve ser desenvolvido em NodeJS
 - O sistema deve ter testes unitários
 - O sistema deve ter testes de integração

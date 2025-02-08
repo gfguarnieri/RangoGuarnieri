@@ -1,6 +1,6 @@
 import { ICreateRestaurantHoursDTO } from '../dtos/ICreateRestaurantHoursDTO'
 import { IUpdateRestaurantHoursDTO } from '../dtos/IUpdateRestaurantHoursDTO'
-import { IRestaurantHours } from '../models/IRestaurantHours'
+import { RestaurantHours } from '../entities/RestaurantHours'
 
 export interface IRestaurantHoursRepository {
   create(
@@ -11,7 +11,7 @@ export interface IRestaurantHoursRepository {
     id: string,
     hours: IUpdateRestaurantHoursDTO,
   ): Promise<IUpdateRestaurantHoursDTO | undefined>
-  findById(id: string): Promise<IRestaurantHours | undefined>
-  listByRestaurantId(restaurantId: string): Promise<IRestaurantHours[]>
+  findById(id: string): Promise<RestaurantHours | undefined>
+  listByRestaurantId(restaurantId: string): Promise<RestaurantHours[]>
   delete(id: string): Promise<void>
 }

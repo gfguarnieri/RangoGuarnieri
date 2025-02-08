@@ -1,18 +1,17 @@
 import { ICreateProductDTO } from 'domain/product/dtos/ICreateProductDTO'
 import { Product } from 'domain/product/entities/Product'
-import { IProduct } from 'domain/product/models/IProduct'
 import { IProductRepository } from 'domain/product/repositories/IProductRepository'
 
 export class InMemoryProductRepository implements IProductRepository {
-  private products: IProduct[] = []
+  private products: Product[] = []
 
-  async create(data: ICreateProductDTO): Promise<IProduct> {
+  async create(data: ICreateProductDTO): Promise<Product> {
     const product = new Product(data)
     this.products.push(product)
     return product
   }
 
-  async update(id: string, data: IProduct): Promise<IProduct | undefined> {
+  async update(id: string, data: Product): Promise<Product | undefined> {
     const productIndex = this.products.findIndex((product) => product.id === id)
     if (productIndex === -1) {
       return undefined
@@ -22,21 +21,21 @@ export class InMemoryProductRepository implements IProductRepository {
     return updatedProduct
   }
 
-  async list(): Promise<IProduct[]> {
+  async list(): Promise<Product[]> {
     return this.products
   }
 
-  async listByCategoryId(categoryId: string): Promise<IProduct[]> {
+  async listByCategoryId(categoryId: string): Promise<Product[]> {
     return this.products.filter((product) => product.categoryId === categoryId)
   }
 
-  async listByRestaurantId(restaurantId: string): Promise<IProduct[]> {
+  async listByRestaurantId(restaurantId: string): Promise<Product[]> {
     return this.products.filter(
       (product) => product.restaurantId === restaurantId,
     )
   }
 
-  async findById(id: string): Promise<IProduct | undefined> {
+  async findById(id: string): Promise<Product | undefined> {
     return this.products.find((product) => product.id === id)
   }
 

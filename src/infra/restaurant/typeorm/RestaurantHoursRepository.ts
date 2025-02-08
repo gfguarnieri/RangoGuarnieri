@@ -1,11 +1,11 @@
 import { z } from 'zod'
 import { ICreateRestaurantHoursDTO } from '@domain/restaurant/dtos/ICreateRestaurantHoursDTO'
-import { IUpdateRestaurantHoursDTO } from '@domain/restaurant/dtos/IUpdateRestaurantHoursDTO'
 import { RestaurantHours } from '@domain/restaurant/entities/RestaurantHours'
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 import { RangoDataSource } from 'shared/infra/typeorm/connection'
 import { RepositoryError } from 'shared/errors/RepositoryError'
 import { IRestaurantHours } from '@domain/restaurant/models/IRestaurantHours'
+import { IUpdateRestaurantHoursDTO } from '@domain/restaurant/dtos/IUpdateRestaurantHoursDTO'
 
 export class RestaurantHoursRepository implements IRestaurantHoursRepository {
   async create(hours: ICreateRestaurantHoursDTO): Promise<RestaurantHours> {

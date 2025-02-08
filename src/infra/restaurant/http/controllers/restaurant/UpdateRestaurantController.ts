@@ -1,9 +1,9 @@
 import { UpdateRestauranteUseCase } from '@domain/restaurant/useCases/updateRestaurant/UpdateRestaurantUseCase'
-import { DayOfWeek } from '@domain/restaurant/models/IRestaurantHours'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { StatusCodes } from 'http-status-codes'
 import { z } from '@zod/i18n'
+import { DayOfWeek } from 'domain/core/models/IHours'
 
 const requestSchema = z.object({
   params: z.object({

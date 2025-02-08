@@ -1,4 +1,4 @@
-import { IRestaurantHours } from '@domain/restaurant/models/IRestaurantHours'
+import { RestaurantHours } from '@domain/restaurant/entities/RestaurantHours'
 import { IRestaurantHoursRepository } from '@domain/restaurant/repositories/IRestaurantHoursRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
@@ -11,7 +11,7 @@ export class ListRestaurantHoursUseCase {
     private restaurantHoursRepository: IRestaurantHoursRepository,
   ) {}
 
-  async execute(restaurantId: string): Promise<IRestaurantHours[]> {
+  async execute(restaurantId: string): Promise<RestaurantHours[]> {
     if (!restaurantId) {
       throw new UseCaseValidationError('Restaurant ID is required')
     }

@@ -1,7 +1,12 @@
-import { IHours } from 'domain/core/models/IHours'
+import { IProductSaleDay } from './IProductSaleDays'
 
-export interface IProductSale extends IHours {
-  productId?: string
-  priceWithDiscount: number
+export interface IProductSale {
+  id?: string
+  productId: string
+  promotionPrice: number
+  description: string
+  active: boolean
+  productSaleDay?: IProductSaleDay[]
   createdAt?: Date
+  updatedAt?: Date
 }
