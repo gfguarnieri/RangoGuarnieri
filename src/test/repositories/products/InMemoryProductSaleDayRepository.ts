@@ -19,9 +19,9 @@ export class InMemoryProductSaleDayRepository
     )
   }
 
-  async delete(productSaleId: string): Promise<void> {
+  async delete(id: string): Promise<void> {
     this.productSaleDays = this.productSaleDays.filter(
-      (saleDay) => saleDay.productSaleId !== productSaleId,
+      (saleDay) => saleDay.id !== id,
     )
   }
 }

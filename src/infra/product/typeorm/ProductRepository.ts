@@ -49,27 +49,7 @@ export class ProductRepository implements IProductRepository {
 
   async list(): Promise<Product[]> {
     const products = (await RangoDataSource.query(
-      `SELECT 
-            p.id,
-            p.restaurant_id as "restaurantId",
-            p.category_id as "categoryId",
-            json_build_object(
-              'id', c.id, 
-              'name', c.name,
-              'createdAt', c.created_at,
-              'updatedAt', c.updated_at,
-              'restaurantId', c.restaurant_id
-            ) as "category",
-            p.name,
-            p.description,
-            p.price,
-            p.image,
-            p.created_at as "createdAt",
-            p.updated_at as "updatedAt"
-        FROM product p
-        LEFT JOIN category c ON p.category_id = c.id
-        ORDER BY c.name, p.name
-        `,
+      this.getQueryProduct(''),
     )) as Product[]
 
     return products
@@ -77,89 +57,38 @@ export class ProductRepository implements IProductRepository {
 
   async findById(id: string): Promise<Product | undefined> {
     const rows = await RangoDataSource.query(
-      `SELECT 
-            p.id,
-            p.restaurant_id as "restaurantId",
-            p.category_id as "categoryId",
-            json_build_object(
-              'id', c.id, 
-              'name', c.name,
-              'createdAt', c.created_at,
-              'updatedAt', c.updated_at,
-              'restaurantId', c.restaurant_id
-            ) as "category",
-            p.name,
-            p.description,
-            p.price,
-            p.image,
-            p.created_at as "createdAt",
-            p.updated_at as "updatedAt"
-        FROM product p
-        LEFT JOIN category c ON p.category_id = c.id
-        WHERE p.id = $1`,
+      this.getQueryProduct('p.id = $1'),
       [id],
     )
 
     if (rows.length === 0) {
       return undefined
     }
-    return rows[0] as Product
+
+    const product = rows[0] as Product
+
+    product.price = Number(product.price)
+
+    return product
   }
 
   async listByCategoryId(categoryId: string): Promise<Product[]> {
-    const rows = (await RangoDataSource.query(
-      `SELECT 
-            p.id,
-            p.restaurant_id as "restaurantId",
-            p.category_id as "categoryId",
-            json_build_object(
-              'id', c.id, 
-              'name', c.name,
-              'createdAt', c.created_at,
-              'updatedAt', c.updated_at,
-              'restaurantId', c.restaurant_id
-            ) as "category",
-            p.name,
-            p.description,
-            p.price,
-            p.image,
-            p.created_at as "createdAt",
-            p.updated_at as "updatedAt"
-        FROM product p
-        LEFT JOIN category c ON p.category_id = c.id
-        WHERE p.category_id = $1
-        ORDER BY c.name, p.name
-        `,
+    let rows = (await RangoDataSource.query(
+      this.getQueryProduct(`p.category_id = $1`),
       [categoryId],
     )) as Product[]
+
+    rows = rows.map((product) => {
+      product.price = Number(product.price)
+      return product
+    })
 
     return rows
   }
 
   async listByRestaurantId(restaurantId: string): Promise<Product[]> {
     const rows = (await RangoDataSource.query(
-      `SELECT 
-            p.id,
-            p.restaurant_id as "restaurantId",
-            p.category_id as "categoryId",
-            json_build_object(
-              'id', c.id, 
-              'name', c.name,
-              'createdAt', c.created_at,
-              'updatedAt', c.updated_at,
-              'restaurantId', c.restaurant_id
-            ) as "category",
-            p.name,
-            p.description,
-            p.price,
-            p.image,
-            p.created_at as "createdAt",
-            p.updated_at as "updatedAt"
-        FROM product p
-        LEFT JOIN category c ON p.category_id = c.id
-        WHERE p.restaurant_id = $1
-        ORDER BY c.name, p.name
-        `,
+      this.getQueryProduct('p.restaurant_id = $1'),
       [restaurantId],
     )) as Product[]
 
@@ -194,5 +123,55 @@ export class ProductRepository implements IProductRepository {
     if (rowsAffected === 0) {
       throw new RepositoryError('Product not found')
     }
+  }
+
+  private getQueryProduct(filter: string) {
+    return `
+    SELECT 
+          p.id,
+          p.restaurant_id as "restaurantId",
+          p.category_id as "categoryId",
+          json_build_object(
+              'id', c.id, 
+              'name', c.name,
+              'createdAt', c.created_at,
+              'updatedAt', c.updated_at,
+              'restaurantId', c.restaurant_id
+          ) as "category",
+          CASE
+              WHEN sale.id IS NOT NULL THEN
+                  json_build_object(
+                      'id', sale.id,
+                      'description', sale.description,
+                      'promotionPrice', sale.promotion_price,
+                      'isActive', sale.is_active,
+                      'productSaleDay', COALESCE(
+                          json_agg(
+                              json_build_object(
+                                  'id', rd.id,
+                                  'dayOfWeek', rd.day_of_week,
+                                  'openingTime', rd.opening_time,
+                                  'closingTime', rd.closing_time
+                              ) 
+                          )FILTER (WHERE rd.id IS NOT NULL),'[]'::json
+                      )
+                  )
+              ELSE NULL
+          END as "productSale",
+          p.name,
+          p.description,
+          p.price,
+          p.image,
+          p.created_at as "createdAt",
+          p.updated_at as "updatedAt"
+      FROM product p
+      LEFT JOIN category c ON p.category_id = c.id
+      LEFT JOIN product_sale sale ON p.id = sale.product_id  AND sale.is_active = TRUE
+      LEFT JOIN product_sale_day rd ON sale.id = rd.product_sale_id
+      ${filter ? 'WHERE ' + filter + ' ' : ''}
+      GROUP BY p.id, c.id, sale.id
+      ORDER BY c.name, p.name
+    
+    `
   }
 }

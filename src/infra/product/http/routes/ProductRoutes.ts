@@ -7,12 +7,13 @@ import { UpdateProductImageController } from '../controllers/product/UpdateProdu
 import { UpdateProductController } from '../controllers/product/UpdateProductController'
 import { ListProductByCategoryController } from '../controllers/product/ListProductByCategoryController'
 import { ListProductByRestaurantController } from '../controllers/product/ListProductByRestaurantController'
-
+import { FindProductController } from '../controllers/product/FindProductController'
 const productsRoutes = Router()
 
 const createProductController = new CreateProductController()
 const updateProductController = new UpdateProductController()
 const listProductController = new ListProductController()
+const findProductController = new FindProductController()
 const listProductByCategoryController = new ListProductByCategoryController()
 const listProductByRestaurantController =
   new ListProductByRestaurantController()
@@ -20,6 +21,7 @@ const deleteProductController = new DeleteProductController()
 const updateProductImageController = new UpdateProductImageController()
 
 productsRoutes.get('/', listProductController.handle)
+productsRoutes.get('/:id', findProductController.handle)
 productsRoutes.get('/category/:id', listProductByCategoryController.handle)
 productsRoutes.get('/restaurant/:id', listProductByRestaurantController.handle)
 productsRoutes.post(

@@ -1,6 +1,11 @@
 import { IHours } from 'domain/core/models/IHours'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 
+export function timeToInt(timeStr: string): number {
+  const [hours, minutes] = timeStr.split(':')
+  return parseInt(hours.padStart(2, '0') + minutes.padStart(2, '0'))
+}
+
 export function getCurrentDayOfWeekAndHour() {
   const date = new Date()
   const days = [

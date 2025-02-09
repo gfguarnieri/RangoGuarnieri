@@ -3,6 +3,6 @@ import { ProductSaleDay } from '../entities/ProductSaleDay'
 
 export interface IProductSaleDayRepository {
   create(saleDay: ICreateProductSaleDayDTO): Promise<ProductSaleDay>
-  delete(productSaleId: string): Promise<void>
+  delete(id: string): Promise<void>
   listByProductSaleId(productSaleId: string): Promise<ProductSaleDay[]>
 }

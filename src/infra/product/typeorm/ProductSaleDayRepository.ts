@@ -29,16 +29,11 @@ export class ProductSaleDayRepository implements IProductSaleDayRepository {
     return productSaleDayCreated
   }
 
-  async delete(productSaleId: string): Promise<void> {
-    const query = await RangoDataSource.query(
-      `DELETE FROM product_sale_day WHERE product_sale_id = $1`,
-      [productSaleId],
-    )
-    const rowsAffected = query[1]
-
-    if (rowsAffected === 0) {
-      throw new RepositoryError('Error deleting product sale day')
-    }
+  async delete(id: string): Promise<void> {
+    await RangoDataSource.query(`DELETE FROM product_sale_day WHERE id = $1`, [
+      id,
+    ])
+    console.log(id)
   }
 
   async listByProductSaleId(productSaleId: string): Promise<ProductSaleDay[]> {

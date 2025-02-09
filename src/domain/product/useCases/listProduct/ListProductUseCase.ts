@@ -3,6 +3,7 @@ import { Product } from 'domain/product/entities/Product'
 import { ProductBucket } from 'domain/product/models/IProduct'
 import { IProductRepository } from 'domain/product/repositories/IProductRepository'
 import { DependencyInjectionTokens } from 'shared/container/DependencyInjectionTokens'
+import { verifySalePrice } from 'shared/validations/salePriceValidation'
 import { inject, injectable } from 'tsyringe'
 
 @injectable()
@@ -22,7 +23,7 @@ export class ListProductUseCase {
           product.image,
           ProductBucket,
         )
-        product.price = Number(product.price)
+        verifySalePrice(product.productSale!, product)
       }
       return product
     })
