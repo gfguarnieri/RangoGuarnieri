@@ -51,7 +51,10 @@ export class UpdateRestauranteImageUseCase {
 
     const response: IResponseImageRestaurant = {
       id: updatedRestaurant.id!,
-      image: updatedRestaurant.image!,
+      image: await this.storageProvider.getUrl(
+        updatedRestaurant.image!,
+        RestaurantBucket,
+      ),
     }
 
     return response
