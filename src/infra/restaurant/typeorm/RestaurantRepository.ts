@@ -123,18 +123,32 @@ export class RestaurantRepository implements IRestaurantRepository {
   async list(): Promise<Restaurant[]> {
     const rows = await RangoDataSource.query(
       `SELECT 
-        id,
-        image,
-        name, 
-        address,
-        neighborhood,
-        number,
-        city,
-        state,
-        postalCode,
-        created_at as "createdAt",
-        updated_at as "updatedAt"
-      FROM restaurant`,
+        r.id,
+        r.image,
+        r.name, 
+        r.address,
+        r.neighborhood,
+        r.number,
+        r.city,
+        r.state,
+        r.postalCode,
+        r.created_at as "createdAt",
+        r.updated_at as "updatedAt",
+        COALESCE(jsonb_agg(
+              jsonb_build_object(
+                  'id', rh.id,
+                  'dayOfWeek', rh.day_of_week,
+                  'openingTime', rh.opening_time,
+                  'closingTime', rh.closing_time,
+                  'createdAt', rh.created_at
+              )
+          ) FILTER (WHERE rh.id IS NOT NULL), '[]'::jsonb) as "restaurantHours"
+      FROM restaurant r
+          LEFT JOIN restaurant_hours rh ON rh.restaurant_id = r.id
+      GROUP BY r.id
+      ORDER BY r.name
+      
+      `,
     )
     const restaurants = rows as Restaurant[]
     return restaurants

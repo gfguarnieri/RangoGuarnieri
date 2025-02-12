@@ -7,6 +7,6 @@ export class ListRestaurantController {
   async handle(_request: Request, response: Response): Promise<Response> {
     const listRestaurantUseCase = container.resolve(ListRestaurantUseCase)
     const restaurants = await listRestaurantUseCase.execute()
-    return response.status(StatusCodes.CREATED).json(restaurants)
+    return response.status(StatusCodes.OK).json(restaurants)
   }
 }

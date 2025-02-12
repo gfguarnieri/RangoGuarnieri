@@ -21,6 +21,11 @@ export const swaggerDocs = {
       name: 'Restaurante',
       description: 'Endpoints relacionados a restaurantes',
     },
+    {
+      name: 'Horários de funcionamento',
+      description:
+        'Endpoints relacionados aos horários de funcionamento dos restaurantes',
+    },
   ],
   paths: {
     '/restaurants': {
@@ -321,6 +326,136 @@ export const swaggerDocs = {
           },
           404: {
             description: 'Not Found',
+          },
+        },
+      },
+    },
+    '/restaurant-hours/{restaurantId}': {
+      get: {
+        tags: ['Horários de funcionamento'],
+        summary: 'Listar horários de funcionamento',
+        description: 'Lista os horários de funcionamento de um restaurante',
+        parameters: [
+          {
+            name: 'restaurantId',
+            in: 'path',
+            required: true,
+            description: 'Restaurant ID',
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: 'Success',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'string' },
+                      createdAt: { type: 'string', format: 'date-time' },
+                      restaurantId: { type: 'string' },
+                      openingTime: {
+                        type: 'string',
+                        format: 'time',
+                        example: '08:00',
+                      },
+                      closingTime: {
+                        type: 'string',
+                        format: 'time',
+                        example: '08:00',
+                      },
+                      dayOfWeek: {
+                        type: 'string',
+                        enum: [
+                          'SUNDAY',
+                          'MONDAY',
+                          'TUESDAY',
+                          'WEDNESDAY',
+                          'THURSDAY',
+                          'FRIDAY',
+                          'SATURDAY',
+                        ],
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      put: {
+        tags: ['Horários de funcionamento'],
+        summary: 'Atualizar horários de funcionamento',
+        description: 'Atualiza os horários de funcionamento de um restaurante',
+        parameters: [
+          {
+            name: 'restaurantId',
+            in: 'path',
+            required: true,
+            description: 'Restaurant ID',
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  restaurantHours: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        openingTime: {
+                          type: 'string',
+                          minLength: 5,
+                          maxLength: 5,
+                          format: 'time',
+                          example: '08:00',
+                        },
+                        closingTime: {
+                          type: 'string',
+                          minLength: 5,
+                          maxLength: 5,
+                          format: 'time',
+                          example: '08:00',
+                        },
+                        dayOfWeek: {
+                          type: 'string',
+                          enum: [
+                            'SUNDAY',
+                            'MONDAY',
+                            'TUESDAY',
+                            'WEDNESDAY',
+                            'THURSDAY',
+                            'FRIDAY',
+                            'SATURDAY',
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          204: {
+            description: 'No Content',
+          },
+          400: {
+            description: 'Bad Request',
           },
         },
       },
