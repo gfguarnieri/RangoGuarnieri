@@ -8,6 +8,7 @@ import { IFileUploaded } from '../../../core/models/IFileUploaded'
 import { UseCaseValidationError } from 'shared/errors/UseCaseValidationError'
 import { IStorageProvider } from 'domain/core/providers/IStorageProvider'
 import { IRestaurantRepository } from '@domain/restaurant/repositories/IRestaurantRepository'
+import { RestaurantBucket } from '@domain/restaurant/models/IRestaurant'
 
 let restaurantRepository: IRestaurantRepository
 let storageProvider: IStorageProvider
@@ -55,7 +56,10 @@ describe('UpdateRestaurantImageUseCase', () => {
     })
 
     expect(response).toHaveProperty('id')
-    expect(response).toHaveProperty('image', file.filename)
+    expect(response).toHaveProperty(
+      'image',
+      RestaurantBucket + '/' + file.filename,
+    )
   })
 
   it('should throw an error if restaurant does not exist', async () => {

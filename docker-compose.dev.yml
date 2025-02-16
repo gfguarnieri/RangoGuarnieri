@@ -1,7 +1,7 @@
 services:
-  postgres:
+  postgres-dev:
     image: postgres
-    container_name: pgRangoGuarnieri
+    container_name: pgRangoGuarnieri-dev
     ports:
       - "${PG_PORT}:5432"
     environment:

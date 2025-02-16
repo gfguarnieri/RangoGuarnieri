@@ -14,7 +14,7 @@ Rango Food é uma API RESTful para cadastro de restaurantes e produtos. O sistem
     - [x] O sistema deve permitir o cadastro de horário de funcionamento do restaurante
     - [x] O sistema deve permitir a alteração de horário de funcionamento do restaurante
 
-- [ ] Produtos
+- [x] Produtos
     - [x] O sistema deve permitir o cadastro de categorias de produtos
     - [x] O sistema deve permitir a alteração de categorias de produtos
     - [x] O sistema deve permitir a exclusão de categorias de produtos
@@ -28,9 +28,9 @@ Rango Food é uma API RESTful para cadastro de restaurantes e produtos. O sistem
     - [x] O sistema deve permitir a exclusão de produtos
     - [x] O sistema deve permitir a listagem de produtos pelo restaurante
     - [x] O sistema deve permitir a busca de produto pelo Id
-    - [ ] O sistema deve permitir adicionar um produto em promoção
-    - [ ] O sistema deve permitir remover um produto da promoção
-    - [ ] O sistema deve permitir remover um produto da promoção
+    - [x] O sistema deve permitir adicionar um produto em promoção
+    - [x] O sistema deve permitir remover um produto da promoção
+    - [x] O sistema deve permitir remover um produto da promoção
 
 ### RNF - Requisitos não Funcionais 
 - O sistema deve ser desenvolvido em NodeJS
@@ -74,14 +74,11 @@ Para configurar as variáveis de ambiente, crie um arquivo `.env` na raiz do pro
 #### Scripts
 - `npm run dev`: Inicia o servidor em modo de desenvolvimento
 - `npm run test`: Executa os testes unitários
-- `npm run db-dev`: Inicia o banco de dados em modo de desenvolvimento com base no arquivo `.env.dev`
-
-#### Banco de Dados (Docker)
-
-Para configurar o banco de dados, execute o comando abaixo:
-`docker-compose --env-file <.env file> up -d`
-
-:warning: *Definir configuração do banco de dados em .env*
+- `npm run test-integration`: Executa os testes de integração
+- `npm run db-dev-up`: Inicia container com banco de dados PostgreSQL no ambiente de DEV com base no arquivo `.env.dev`
+- `npm run db-dev-down`: Remove container com banco de dados PostgreSQL no ambiente de DEV
+- `npm run db-test-up`: Inicia container com banco de dados PostgreSQL no ambiente de TEST com base no arquivo `.env.test`
+- `npm run db-test-down`: Remove container com banco de dados PostgreSQL no ambiente de TEST
 
 #### Instalação de dependências
 
@@ -94,6 +91,7 @@ Para instalar as dependências do projeto, execute o comando abaixo:
 [Tsrynge](https://github.com/microsoft/tsyringe) - Injeção de dependência
 [TypeORM](https://github.com/typeorm/typeorm) - Usado apenas para conexão com o banco de dados
 [Vitest](https://github.com/vitest-dev/vitest) - Criação de testes automatizados
+[Supertest](https://github.com/ladjs/supertest) - Para testes de rotas
 [http-status-codes](https://github.com/prettymuchbryce/http-status-codes) - Para enums contendo os códigos de status HTTP
 [dotenv](https://github.com/motdotla/dotenv) - Para carregar variáveis de ambiente
 [Zod](https://github.com/colinhacks/zod) - Para validação de dados

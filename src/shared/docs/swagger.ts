@@ -375,8 +375,8 @@ export const swaggerDocs = {
       delete: {
         tags: ['Restaurante'],
         summary: 'Deletar restaurante',
-        description: `Deleta um restaurante. 
-          *Atenção*: Todas as categorias e produtos relacionados também serão deletados.`,
+        description:
+          'Deleta um restaurante. *Atenção*: Todas as categorias e produtos relacionados também serão deletados.',
         parameters: [
           {
             name: 'restaurantId',
@@ -874,10 +874,7 @@ export const swaggerDocs = {
             'application/json': {
               schema: {
                 type: 'object',
-                required: [
-                  'name',
-                  'restaurantId',
-                ],
+                required: ['name', 'restaurantId'],
                 properties: {
                   name: {
                     type: 'string',
@@ -1256,7 +1253,15 @@ export const swaggerDocs = {
           },
           dayOfWeek: {
             type: 'string',
-            enum: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'],
+            enum: [
+              'SUNDAY',
+              'MONDAY',
+              'TUESDAY',
+              'WEDNESDAY',
+              'THURSDAY',
+              'FRIDAY',
+              'SATURDAY',
+            ],
           },
           openingTime: {
             type: 'string',
@@ -1417,12 +1422,16 @@ export const swaggerDocs = {
           'promotionPrice',
           'description',
           'productSaleDay',
+          'active',
         ],
         properties: {
           productId: {
             type: 'string',
             format: 'uuid',
             minLength: 1,
+          },
+          active: {
+            type: 'boolean',
           },
           promotionPrice: {
             type: 'number',
@@ -1437,11 +1446,7 @@ export const swaggerDocs = {
             type: 'array',
             items: {
               type: 'object',
-              required: [
-                'dayOfWeek',
-                'openingTime',
-                'closingTime',
-              ],
+              required: ['dayOfWeek', 'openingTime', 'closingTime'],
               properties: {
                 dayOfWeek: {
                   type: 'string',
@@ -1475,6 +1480,13 @@ export const swaggerDocs = {
       UpdateProductSale: {
         type: 'object',
         properties: {
+          productId: {
+            type: 'string',
+            format: 'uuid',
+          },
+          active: {
+            type: 'boolean',
+          },
           promotionPrice: {
             type: 'number',
             minimum: 0.1,

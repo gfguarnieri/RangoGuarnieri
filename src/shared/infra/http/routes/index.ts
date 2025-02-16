@@ -12,6 +12,6 @@ router.use('/restaurant-hours', restaurantsHoursRoutes)
 
 router.use('/categories', categoriesRoutes)
 router.use('/products', productsRoutes)
-router.use('/products-sales', productSalesRoutes)
+router.use('/product-sales', productSalesRoutes)
 
 export { router }

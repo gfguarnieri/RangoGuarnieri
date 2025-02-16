@@ -11,7 +11,6 @@ export function ErrorHandler(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction,
 ) {
-  console.error(err)
   if (err instanceof UseCaseValidationError) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       type: 'usecase',
